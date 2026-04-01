@@ -1,0 +1,90 @@
+import os
+from utils.file_system import create_directory, create_file
+
+GITIGNORE_CONTENT = """# Build directories
+build/
+bin/
+out/
+dist/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Executables and binaries
+*.exe
+*.out
+*.app
+*.elf
+*.so
+*.so.*
+*.dll
+*.dylib
+*.a
+*.lib
+*.o
+*.obj
+
+# Debug / temp files
+*.log
+*.tmp
+*.temp
+
+# IDE / Editor files
+.vscode/
+.idea/
+cmake-build-*/
+*.vcxproj*
+*.sln
+*.user
+*.filters
+
+# OS files
+*~
+.DS_Store
+Thumbs.db
+"""
+
+README_CONTENT = """# C++ Project
+
+> This is your README; configure it according to your goals.
+"""
+
+MAIN_CONTENT = """#include <iostream>
+
+int main() {
+
+    std::cout << "Hello, World!" << std::endl;
+
+    return 0;
+}
+"""
+
+def setup_cpp(name):
+    class_name = "".join(p.capitalize() for p in name.replace("_", "-").split("-"))
+
+    # Folders
+    create_directory(os.path.join(name, "src", "core"))
+    create_directory(os.path.join(name, "include", "core"))
+    create_directory(os.path.join(name, "build"))
+    create_directory(os.path.join(name, "tests"))
+    create_directory(os.path.join(name, "external"))
+    create_directory(os.path.join(name, "assets"))
+    create_directory(os.path.join(name, "docs"))
+
+    cmake_content = f"""cmake_minimum_required(VERSION 3.20)
+project({class_name} VERSION 0.1.0)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(${{PROJECT_NAME}} src/main.cpp)
+"""
+
+    # Files
+    create_file(os.path.join(name, "CMakeLists.txt"), cmake_content)
+    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
+    create_file(os.path.join(name, "src", "main.cpp"), MAIN_CONTENT)
