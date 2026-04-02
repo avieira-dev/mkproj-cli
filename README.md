@@ -81,7 +81,6 @@ mkproj-cli/
 ├── .gitignore
 ├── LICENSE
 ├── main.py
-├── pyproject.toml
 └── README.md
 ```
 
