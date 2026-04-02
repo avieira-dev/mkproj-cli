@@ -6,46 +6,63 @@ build/
 bin/
 out/
 dist/
+cmake-build-*/
 
-# CMake generated files
+# CMake files
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+install_manifest.txt
+
+# Useful for tooling (ignore if not using clangd)
 compile_commands.json
 
-# Executables and binaries
-*.exe
-*.out
-*.app
-*.elf
+# Compilation artifacts
+*.o
+*.obj
+*.a
+*.lib
+
+# Shared libraries / executables
 *.so
 *.so.*
 *.dll
 *.dylib
-*.a
-*.lib
-*.o
-*.obj
+*.exe
+*.out
+*.app
+*.elf
 
-# Debug / temp files
+# Debug / temp
 *.log
 *.tmp
 *.temp
+*.stackdump
 
-# IDE / Editor files
+# Coverage / profiling
+*.gcda
+*.gcno
+*.gcov
+coverage/
+
+# Dependencies (common in C++)
+/vcpkg_installed/
+/conan/
+
+# IDE / Editor
 .vscode/
 .idea/
-cmake-build-*/
 *.vcxproj*
 *.sln
 *.user
 *.filters
 
-# OS files
+# OS
 *~
 .DS_Store
 Thumbs.db
+.cache/
 """
 
 README_CONTENT = """# C++ Project
@@ -56,9 +73,7 @@ README_CONTENT = """# C++ Project
 MAIN_CONTENT = """#include <iostream>
 
 int main() {
-
     std::cout << "Hello, World!" << std::endl;
-
     return 0;
 }
 """
