@@ -1,11 +1,11 @@
 import os
 import sys
-from languages.python_strategy import setup_python
-from languages.cpp_strategy import setup_cpp
+import languages
 
 languages = {
-    "1": ("Python", setup_python),
-    "2": ("C++", setup_cpp)    
+    "1": ("Python", languages.setup_c),
+    "2": ("C++", languages.setup_cpp),
+    "3": ("C", languages.setup_c)    
 }
 
 def command_new():
