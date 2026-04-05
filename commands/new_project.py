@@ -1,11 +1,12 @@
 import os
 import sys
-import languages
+from languages import setup_python, setup_cpp, setup_c, setup_web
 
-languages = {
-    "1": ("Python", languages.setup_c),
-    "2": ("C++", languages.setup_cpp),
-    "3": ("C", languages.setup_c)    
+STRATEGIES = {
+    "1": ("Python", setup_python),
+    "2": ("C++", setup_cpp),
+    "3": ("C", setup_c),
+    "4": ("Web (HTML, CSS and JS)", setup_web)   
 }
 
 def command_new():
@@ -27,13 +28,13 @@ def command_new():
 
 
     print("Select the language:")
-    for key, (lang_name, _) in languages.items():
+    for key, (lang_name, _) in STRATEGIES.items():
         print(f"  {key}) {lang_name}")
 
     choice = input("Enter selection: ")
 
-    if choice in languages:
-        _, setup_func = languages[choice]
+    if choice in STRATEGIES:
+        _, setup_func = STRATEGIES[choice]
         try:
             setup_func(name)
             print("\nProject created successfully!")
