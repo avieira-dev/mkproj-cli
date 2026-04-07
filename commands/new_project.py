@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from utils.colors import Colors
 from languages import (
     setup_python, setup_cpp, setup_c, 
@@ -64,8 +65,20 @@ def command_new():
             
             setup_func(name)
             
-            print(f"\n{Colors.GREEN}✔ Success!{Colors.END} Project {Colors.BOLD}{name}{Colors.END} is ready.")
+            spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+
+            for i in range(20):
+                char = spinner[i % len(spinner)]
+                sys.stdout.write(f"\r{Colors.CYAN}{char} Finishing touches...{Colors.END}")
+                sys.stdout.flush()
+                time.sleep(0.1)
+            
+            sys.stdout.write("\r" + " " * 40 + "\r")
+            sys.stdout.flush()
+            
+            print(f"{Colors.GREEN}✔ Success!{Colors.END} Project {Colors.BOLD}{name}{Colors.END} is ready.")
             print(f"{Colors.BLUE}→ Next step:{Colors.END} cd {name}\n")
+            
         except Exception as e:
             print(f"\n{Colors.RED}✖ An unexpected error occurred: {e}{Colors.END}")
     else:
