@@ -25,15 +25,25 @@
 
 **mkproj-cli** automates the tedious process of creating directory trees and boilerplate files. Whether you are starting a microservice in Python, a system tool in C/C++, or a corporate app in Java, **mkproj** ensures every project starts with a professional, clean, and consistent structure.
 
+### Preview
+
+<p align="center">
+    <em>Interactive language selection menu</em><br>
+    <img src="./assets/screenshots/screenshot-001.png" alt="mkproj-cli interface demo 1" width="600">
+    <br>
+    <em>Automatic directory and file generation</em><br>
+    <img src="./assets/screenshots/screenshot-002.png" alt="mkproj-cli interface demo 2" width="600">
+</p>
+
 ## Features
 
 - Multi-language support
 - Modular architecture
-- Smart scaffolding (automatically generates):
+- **Smart scaffolding** (automatically generates):
   - Directories
   - Build files
   - Documentation
-- Generation of a base `.gitignore` file for the selected project, according to the programming language
+- Auto-creates `.gitignore` based on the selected language.
 - Prevents accidental overwrites of existing projects
 
 ## Installation
