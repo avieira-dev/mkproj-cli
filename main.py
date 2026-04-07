@@ -11,6 +11,7 @@ sys.path.append(str(script_dir))
 # Import colors and commands
 from utils.colors import Colors
 from commands.new_project import command_new
+from commands.command_help import command_help
 
 def print_banner():
     banner = fr"""{Colors.CYAN}{Colors.BOLD}
@@ -33,17 +34,18 @@ def main():
     # Show the logo as soon as the tool is called
     print_banner()
     
-    if len(sys.argv) < 2:
-        print(f"{Colors.YELLOW}Usage: mkproj <command> [args]{Colors.END}")
+    if len(sys.argv) < 2 or sys.argv[1] in ["help", "-h", "--help"]:
+        command_help()
         return
 
-    command = sys.argv[1]
+    command = sys.argv[1].lower()
 
     try:
         if command == "new":
             command_new()
         else:
             print(f"{Colors.RED}Unknown command: {command}{Colors.END}")
+            print(f"{Colors.YELLOW}Hint: Type 'mkproj --help' to see available commands.{Colors.END}")
     except KeyboardInterrupt:
         # If the user presses Ctrl + C (end the process)
         print(f"\n\n{Colors.YELLOW}Operation cancelled by user. Goodbye!{Colors.END}")
