@@ -52,6 +52,7 @@
 
 ```bash
 git clone https://github.com/avieira-dev/mkproj-cli.git
+cd mkproj-cli
 ```
 
 ### 2. Global Setup (Linux/MacOS)
@@ -60,9 +61,14 @@ git clone https://github.com/avieira-dev/mkproj-cli.git
 2. Make it executable and create the symbolic link:
 
 ```bash
-chmod +x main.py
 sudo ln -s "$(pwd)/main.py" /usr/local/bin/mkproj
 ```
+
+> [!TIP]  
+> If you encounter permission issues, you can ensure access by running:  
+> ```bash  
+> chmod +x main.py  
+> ```
 
 > [!NOTE]  
 > To remove the global command, run the following in the terminal:  
