@@ -1,13 +1,14 @@
 import os
 import sys
-from languages import setup_python, setup_cpp, setup_c, setup_web, setup_java
+from languages import setup_python, setup_cpp, setup_c, setup_web, setup_java, setup_go
 
 STRATEGIES = {
     "1": ("Python", setup_python),
     "2": ("C++", setup_cpp),
     "3": ("C", setup_c),
     "4": ("Java", setup_java),
-    "5": ("Web (HTML, CSS and JS)", setup_web)   
+    "5": ("Web (HTML, CSS and JS)", setup_web),
+    "6": ("Go (Golang)", setup_go)   
 }
 
 def command_new():
