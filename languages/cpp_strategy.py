@@ -65,11 +65,6 @@ Thumbs.db
 .cache/
 """
 
-README_CONTENT = """# C++ Project
-
-> This is your README; configure it according to your goals.
-"""
-
 MAIN_CONTENT = """#include <iostream>
 
 int main() {
@@ -78,7 +73,7 @@ int main() {
 }
 """
 
-def setup_cpp(name):
+def setup_cpp(name, readme_title, readme_description):
     class_name = "".join(p.capitalize() for p in name.replace("_", "-").split("-"))
 
     # Folders
@@ -97,9 +92,16 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(${{PROJECT_NAME}} src/main.cpp)
 """
+    
+    readme_content = f"""# {readme_title}
+
+> {readme_description}
+
+## Table of Contents
+"""
 
     # Files
     create_file(os.path.join(name, "CMakeLists.txt"), cmake_content)
-    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, "README.md"), readme_content)
     create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
     create_file(os.path.join(name, "src", "main.cpp"), MAIN_CONTENT)

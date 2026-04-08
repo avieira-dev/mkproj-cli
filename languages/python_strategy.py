@@ -41,18 +41,20 @@ Thumbs.db
 *.log
 """
 
-README_CONTENT = """# Python Project
-
-> This is your README; configure it according to your goals.
-"""
-
-def setup_python(name):
+def setup_python(name, readme_title, readme_description):
     # Folders
     create_directory(os.path.join(name, "src", "app"))
     create_directory(os.path.join(name, "tests"))
     create_directory(os.path.join(name, "docs"))
 
+    readme_content = f"""# {readme_title}
+
+> {readme_description}
+
+## Table of Contents
+"""
+
     # Files
     create_file(os.path.join(name, "src", "app", "main.py"), 'print("Hello World")\n')
     create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
-    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, "README.md"), readme_content)

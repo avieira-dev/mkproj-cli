@@ -45,11 +45,6 @@ yarn.lock
 pnpm-lock.yaml
 """
 
-README_CONTENT = """# Web Project
-
-> This is your README; configure it according to your goals.
-"""
-
 INDEX_HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +98,7 @@ PACKAGE_JSON = """{{
 }}
 """
 
-def setup_web(name):
+def setup_web(name, readme_title, readme_description):
     # Folders
     create_directory(os.path.join(name, "src", "assets", "css"))
     create_directory(os.path.join(name, "src", "assets", "js"))
@@ -114,10 +109,17 @@ def setup_web(name):
     create_directory(os.path.join(name, "src", "components"))
     create_directory(os.path.join(name, "src", "pages"))
 
+    readme_content = f"""# {readme_title}
+
+> {readme_description}
+
+## Table of Contents
+"""
+
     # Files
     create_file(os.path.join(name, "src", "index.html"), INDEX_HTML.format(project_name = name))
     create_file(os.path.join(name, "src", "assets", "css", "style.css"), CSS_WEB)
     create_file(os.path.join(name, "src", "assets", "js", "script.js"), SCRIPT_WEB)
-    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, "README.md"), readme_content)
     create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
     create_file(os.path.join(name, "package.json"), PACKAGE_JSON.format(name = name))

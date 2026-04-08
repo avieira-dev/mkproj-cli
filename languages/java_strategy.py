@@ -40,12 +40,7 @@ hs_err_pid*
 replay_pid*
 """
 
-README_CONTENT = """# Java Project
-
-> This is your README; configure it according to your goals.
-"""
-
-def setup_java(name):
+def setup_java(name, readme_title, readme_description):
     # Package configuration
     user_part = input("Enter developer/org name (default: user): ").strip().lower() or "user"
     user_clean = user_part.replace("-", "_").replace(" ", "")
@@ -57,7 +52,7 @@ def setup_java(name):
     print(" 2) GUI Application (Swing/MVC structure)")
     gui_choice = input("Enter selection (default: 1): ") or "1"
 
-    # Basic paths (Standard: src/main/java/...)
+    # Basic paths
     package_rel_path = os.path.join("src", "main", "java", "com", user_clean, project_clean)
     full_package_path = os.path.join(name, package_rel_path)
 
@@ -65,7 +60,7 @@ def setup_java(name):
     create_directory(full_package_path)
     create_directory(os.path.join(name, "src", "main", "resources"))
 
-    # Initial code (Fixed Java syntax and f-string)
+    # Initial code
     java_content = f"""package com.{user_clean}.{project_clean};
 
 /**
@@ -78,10 +73,17 @@ public class Main {{
     }}
 }}
 """
+    
+    readme_content = f"""# {readme_title}
+
+> {readme_description}
+
+## Table of Contents
+"""
 
     # Specific logic
     if gui_choice == "2":
-        # Structure for GUI (MVC) - Joining paths correctly
+        # Structure for GUI (MVC)
         create_directory(os.path.join(full_package_path, "view"))
         create_directory(os.path.join(full_package_path, "controller"))
         create_directory(os.path.join(full_package_path, "model"))
@@ -91,4 +93,4 @@ public class Main {{
 
     # General files
     create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
-    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, "README.md"), readme_content)

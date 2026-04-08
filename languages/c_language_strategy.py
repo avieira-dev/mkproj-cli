@@ -51,11 +51,6 @@ coverage/
 Thumbs.db
 """
 
-README_CONTENT = """# C Language Project
-
-> This is your README; configure it according to your goals.
-"""
-
 MAIN_CONTENT = """#include <stdio.h>
 
 int main(void) {
@@ -64,7 +59,7 @@ int main(void) {
 }
 """
 
-def setup_c(name):
+def setup_c(name, readme_title, readme_description):
     class_name = "".join(p.capitalize() for p in name.replace("_", "-").split("-"))
 
     #Folders
@@ -82,8 +77,15 @@ set(CMAKE_C_STANDARD 17)
 add_executable(${{PROJECT_NAME}} src/main.c)
 """
     
+    readme_content = f"""# {readme_title}
+
+> {readme_description}
+
+## Table of Contents
+"""
+    
     #Files
     create_file(os.path.join(name, "CMakeLists.txt"), cmake_content)
-    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, "README.md"), readme_content)
     create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
     create_file(os.path.join(name, "src", "main.c"), MAIN_CONTENT)

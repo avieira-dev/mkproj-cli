@@ -27,14 +27,8 @@ Test binary, built with `go test -c`
 Thumbs.db
 """
 
-README_CONTENT = """# Go Project
-
-> Project created with mkproj-cli.
-"""
-
-def setup_go(name):
-    # Standard Go Project Layout
-    # cmd/ is where the main application entry point resides
+def setup_go(name, readme_title, readme_description):
+    # Standard Go project layout
     create_directory(os.path.join(name, "cmd"))
     create_directory(os.path.join(name, "internal"))
     create_directory(os.path.join(name, "pkg"))
@@ -50,11 +44,17 @@ func main() {{
 """
     
     # Create go.mod (simulating 'go mod init')
-    # Use a generic module path like github.com/user/project
     go_mod = f"module {name}\n\ngo 1.21\n"
+
+    readme_content = f"""# {readme_title}
+
+> {readme_description}
+
+## Table of Contents
+"""
 
     # Creating files
     create_file(os.path.join(name, "cmd", "main.go"), go_main)
     create_file(os.path.join(name, "go.mod"), go_mod)
     create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
-    create_file(os.path.join(name, "README.md"), README_CONTENT)
+    create_file(os.path.join(name, "README.md"), readme_content)

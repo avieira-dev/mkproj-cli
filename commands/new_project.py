@@ -2,9 +2,11 @@ import os
 import sys
 import time
 from utils.colors import Colors
+from utils.prompter import get_readme_data
 from languages import (
     setup_python, setup_cpp, setup_c, 
-    setup_web, setup_java, setup_go
+    setup_web, setup_java, setup_go,
+    setup_rust
 )
 
 # Mapping of available language strategies
@@ -14,7 +16,8 @@ STRATEGIES = {
     "3": ("C", setup_c),
     "4": ("Java", setup_java),
     "5": ("Go (Golang)", setup_go),
-    "6": ("Web (HTML/CSS/JS)", setup_web)
+    "6": ("Web (HTML/CSS/JS)", setup_web),
+    "7": ("Rust", setup_rust)
 }
 
 def command_new():
@@ -60,10 +63,13 @@ def command_new():
 
     if choice in STRATEGIES:
         lang_name, setup_func = STRATEGIES[choice]
+
+        readme_title, readme_description = get_readme_data(name)
+
         try:
             print(f"\n{Colors.YELLOW}⚙ Generating {Colors.BOLD}{lang_name}{Colors.END} structure...{Colors.END}")
             
-            setup_func(name)
+            setup_func(name, readme_title, readme_description)
             
             spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
