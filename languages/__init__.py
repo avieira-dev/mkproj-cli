@@ -4,3 +4,4 @@ from .c_language_strategy import setup_c
 from .web_strategy import setup_web
 from .java_strategy import setup_java
 from .go_strategy import setup_go
+from .rust_strategy import setup_rust
