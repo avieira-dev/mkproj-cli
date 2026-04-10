@@ -22,7 +22,7 @@ def print_banner():
 |_| |_| |_|_|\_\ .__/|_|  \___// |
                |_|            |__/ 
 
-{Colors.END}{Colors.BLUE}» Version 1.0.0 | Developer Tool{Colors.END}
+{Colors.END}{Colors.BLUE}» Version 1.2.0 | Developer Tool{Colors.END}
 """
     print(banner)
 
