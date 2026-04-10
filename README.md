@@ -2,14 +2,15 @@
 
 > A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.
 
-![status](https://img.shields.io/badge/status-in%20development-orange)
+![version](https://img.shields.io/badge/version-v1.2.0-blue)
+![status](https://img.shields.io/badge/status-stable-green)
+![maintenance](https://img.shields.io/badge/maintenance-active-brightgreen)
 ![language](https://img.shields.io/badge/language-Python-yellow)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 
 > [!IMPORTANT]  
-> **mkproj** is a work in progress. We are currently refining the core logic   
-> and adding support for new languages (C, Java, etc.). As such, breaking  
-> changes and bugs are expected;
+> **mkproj** is now in stable version v1.2.0. We are continuously adding support for new
+> languages and improving the scaffolding logic.
 
 ## Table of Contents
 
@@ -37,14 +38,14 @@
 
 ## Features
 
-- Multi-language support
-- Modular architecture
+- **Multi-language support**: Python, C/C++, Java, Go, Rust, TypeScript, and Web.
+- Modular architecture.
 - **Smart scaffolding** (automatically generates):
   - Directories
   - Build files
   - Documentation
 - Auto-creates `.gitignore` based on the selected language.
-- Prevents accidental overwrites of existing projects
+- Prevents accidental overwrites of existing projects.
 
 ## Installation
 
