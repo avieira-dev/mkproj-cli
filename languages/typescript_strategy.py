@@ -64,7 +64,12 @@ def setup_typescript(name,  readme_title, readme_description):
 """
     
     # Content of index.ts
-    index_ts = 'console.log("Hello from TypeScript!");\\n'
+    index_ts = f"""function greet(): string {{
+    return "Hello from TypeScript!";    
+}}
+
+console.log(greet());
+"""
 
     # README content
     readme_content = f"""# {readme_title}
