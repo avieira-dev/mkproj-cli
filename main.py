@@ -15,7 +15,7 @@ from commands.command_help import command_help
 
 def print_banner():
     banner = fr"""{Colors.CYAN}{Colors.BOLD}
-           _
+           _                    _
  _ __ ___ | | ___ __  _ __ ___ (_)
 | '_ ` _ \| |/ / '_ \| '__/ _ \| |
 | | | | | |   <| |_) | | | (_) | |
