@@ -2,7 +2,7 @@ import os
 import sys
 import time
 from utils.colors import Colors
-from utils.prompter import get_readme_data
+from utils.prompter import get_readme_data, get_user_data
 from languages import (
     setup_python, setup_cpp, setup_c, 
     setup_web, setup_java, setup_go,
@@ -67,10 +67,16 @@ def command_new():
 
         readme_title, readme_description = get_readme_data(name)
 
+        if lang_name == "Python":
+            username, email = get_user_data()
+
         try:
             print(f"\n{Colors.YELLOW}⚙ Generating {Colors.BOLD}{lang_name}{Colors.END} structure...{Colors.END}")
-            
-            setup_func(name, readme_title, readme_description)
+
+            if lang_name == "Python":
+                setup_python(name, readme_title, readme_description, username, email)
+            else:
+                setup_func(name, readme_title, readme_description)
             
             spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
