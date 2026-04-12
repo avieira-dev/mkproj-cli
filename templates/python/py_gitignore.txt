@@ -1,0 +1,37 @@
+# Compiled files
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Distribution and packaging
+dist/
+build/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+.tox/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System and logs
+.DS_Store
+Thumbs.db
+*.log
