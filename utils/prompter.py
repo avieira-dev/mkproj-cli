@@ -21,3 +21,13 @@ def get_readme_data(default_name):
         return title, description
     
     return default_name, "Project created with mkproj-cli."
+
+def get_module_go(default_name):
+    print(f"\n{Colors.CYAN}Would you like to use the GitHub repository as a module in the 'go.mod' file? (y/n):{Colors.END}", end = " ")
+    confirm_input = input().lower().strip()
+
+    if confirm_input == "y":
+        module = input(f"{Colors.YELLOW}GitHub repository: {Colors.END}").replace("https://", "").replace("http://", "").strip() or default_name
+        return module
+    
+    return default_name
