@@ -2,11 +2,13 @@
 
 > A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.
 
-![version](https://img.shields.io/badge/version-v1.2.0-blue)
-![status](https://img.shields.io/badge/status-stable-green)
-![maintenance](https://img.shields.io/badge/maintenance-active-brightgreen)
-![language](https://img.shields.io/badge/language-Python-yellow)
-![license](https://img.shields.io/badge/license-MIT-blue)
+<p align="center">
+    <img src="https://img.shields.io/badge/version-v1.2.0-4c1"/>
+    <img src="https://img.shields.io/badge/status-stable-2ea44f"/>
+    <img src="https://img.shields.io/badge/maintenance-active-1f6feb"/>
+    <img src="https://img.shields.io/badge/language-Python-3572A5"/>
+    <img src="https://img.shields.io/badge/license-MIT-6e7781"/>
+</p>
 
 > [!IMPORTANT]  
 > **mkproj** is now in stable version v1.2.0. We are continuously adding support for new
