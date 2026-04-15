@@ -1,33 +1,24 @@
 from utils.colors import Colors
 
 def get_user_data():
-    print(f"\n{Colors.CYAN}Would you like to enter your name and email into the file 'pyproject.toml'? (y/n):{Colors.END}", end = " ")
-    confirm_input = input().lower().strip()
-
-    if confirm_input == "y":
-        username = input(f"{Colors.YELLOW}Username: {Colors.END}").strip() or "Your Name"
-        email = input(f"{Colors.YELLOW}Email: {Colors.END}").strip() or "you@example.com"
-        return username, email
-    
+    print(f"\n{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Configure pyproject.toml?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    if input().lower().strip() == "y":
+        user = input(f"  {Colors.DIM}↳{Colors.END} Username: ").strip() or "Your Name"
+        mail = input(f"  {Colors.DIM}↳{Colors.END} Email: ").strip() or "you@example.com"
+        return user, mail
     return "Your Name", "you@example.com"
 
 def get_readme_data(default_name):
-    print(f"\n{Colors.CYAN}Do you want to customize the README? (y/n):{Colors.END}", end = " ")
-    confirm_input = input().lower().strip()
-
-    if confirm_input == "y":
-        title = input(f"{Colors.YELLOW}Title README [{default_name}]: {Colors.END}").strip() or default_name
-        description = input(f"{Colors.YELLOW}Description: {Colors.END}").strip() or "Project created with mkproj-cli."
-        return title, description
-    
+    print(f"{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Customize README?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    if input().lower().strip() == "y":
+        title = input(f"  {Colors.DIM}↳{Colors.END} Title [{default_name}]: ").strip() or default_name
+        desc = input(f"  {Colors.DIM}↳{Colors.END} Description: ").strip() or "Project created with mkproj-cli."
+        return title, desc
     return default_name, "Project created with mkproj-cli."
 
 def get_module_go(default_name):
-    print(f"\n{Colors.CYAN}Would you like to use the GitHub repository as a module in the 'go.mod' file? (y/n):{Colors.END}", end = " ")
-    confirm_input = input().lower().strip()
-
-    if confirm_input == "y":
-        module = input(f"{Colors.YELLOW}GitHub repository: {Colors.END}").replace("https://", "").replace("http://", "").strip() or default_name
-        return module
-    
+    print(f"\n{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Use GitHub as Go module?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    if input().lower().strip() == "y":
+        repo = input(f"  {Colors.DIM}↳{Colors.END} Repo path: ").replace("https://", "").strip() or default_name
+        return repo
     return default_name
