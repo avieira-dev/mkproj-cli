@@ -11,14 +11,14 @@ from languages import (
 
 # Mapping of available language strategies
 STRATEGIES = {
-    "1": ("Python", setup_python),
-    "2": ("C++", setup_cpp),
-    "3": ("C", setup_c),
-    "4": ("Java", setup_java),
-    "5": ("Go (Golang)", setup_go),
-    "6": ("Web (HTML/CSS/JS)", setup_web),
-    "7": ("Rust", setup_rust),
-    "8": ("TypeScript (Node.js)", setup_typescript)
+    "1": ("Python", setup_python, "🐍"),
+    "2": ("C++", setup_cpp, "💻"),
+    "3": ("C", setup_c, "⚙️ "),
+    "4": ("Java", setup_java, "☕"),
+    "5": ("Go (Golang)", setup_go, "🐹"),
+    "6": ("Web (HTML/CSS/JS)", setup_web, "🌐"),
+    "7": ("Rust", setup_rust, "🦀"),
+    "8": ("TypeScript (Node)", setup_typescript, "🟦")
 }
 
 def command_new():
@@ -28,7 +28,6 @@ def command_new():
         return
     
     name = sys.argv[2].strip()
-
     # Check for empty string
     if not name:
         print(f"{Colors.RED}Error: Project name cannot be empty.{Colors.END}")
@@ -39,65 +38,60 @@ def command_new():
         print(f"\n{Colors.RED}Error: Directory '{name}' already exists!{Colors.END}")
         return
     
-    print(f"{Colors.CYAN}Creating project:{Colors.END} {Colors.BOLD}{name}{Colors.END}\n")
+    print(f"{Colors.CYAN}🚀 Creating project:{Colors.END} {Colors.BOLD}{name}{Colors.END}\n")
 
-    # Styled Menu 
-    print(f"{Colors.BOLD}{Colors.YELLOW}Select the language strategy:{Colors.END}")
+    # Total internal width of the box
+    WIDTH = 42
+
+    print(f"{Colors.PURPLE}┌──────────────────────────────────────────┐{Colors.END}")
+
+    header = " Select the language strategy:"
+
+    print(f"{Colors.PURPLE}│{Colors.END}{Colors.BOLD}{header.ljust(WIDTH)}{Colors.END}{Colors.PURPLE}│{Colors.END}")
     
-    border = f"{Colors.BLUE}+------------------------------------------+{Colors.END}"
-    print(border)
+    print(f"{Colors.PURPLE}├──────────────────────────────────────────┤{Colors.END}")
 
-    for key, (lang_name, _) in STRATEGIES.items():
-        name_padding = lang_name.ljust(37)
-        
-        line = (
-            f"{Colors.BLUE}|{Colors.END}"               
-            f"{Colors.CYAN}{Colors.BOLD}  {key}){Colors.END} "
-            f"{name_padding}"                           
-            f"{Colors.BLUE}|{Colors.END}"               
-        )
-        print(line)
+    for key, (lang_name, _, icon) in STRATEGIES.items():
+        base_text = f"  {key}) {lang_name}"
+        padding = " " * (WIDTH - len(base_text) - 3)
+        line_content = f"  {Colors.CYAN}{key}){Colors.END} {icon} {lang_name}{padding}"
+        print(f"{Colors.PURPLE}│{Colors.END}{line_content}{Colors.PURPLE}│{Colors.END}")
 
-    print(border)
+    print(f"{Colors.PURPLE}└──────────────────────────────────────────┘{Colors.END}")
 
-    choice = input(f"\n{Colors.GREEN}λ{Colors.END} {Colors.BOLD}Enter selection:{Colors.END} ")
+    choice = input(f"\n{Colors.GREEN}❯{Colors.END} {Colors.BOLD}Selection:{Colors.END} ")
 
     if choice in STRATEGIES:
-        lang_name, setup_func = STRATEGIES[choice]
-
+        lang_name, setup_func, _ = STRATEGIES[choice]
         readme_title, readme_description = get_readme_data(name)
 
+        # Specific data
+        context = {}
         if lang_name == "Python":
-            username, email = get_user_data()
-
+            context['user'], context['email'] = get_user_data()
         if lang_name == "Go (Golang)":
-            module = get_module_go(name)
+            context['module'] = get_module_go(name)
 
         try:
             print(f"\n{Colors.YELLOW}⚙ Generating {Colors.BOLD}{lang_name}{Colors.END} structure...{Colors.END}")
-
+            
             if lang_name == "Python":
-                setup_python(name, readme_title, readme_description, username, email)
+                setup_python(name, readme_title, readme_description, context['user'], context['email'])
             elif lang_name == "Go (Golang)":
-                setup_go(name, readme_title, readme_description, module)
+                setup_go(name, readme_title, readme_description, context['module'])
             else:
                 setup_func(name, readme_title, readme_description)
-            
-            spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
-            for i in range(20):
-                char = spinner[i % len(spinner)]
-                sys.stdout.write(f"\r{Colors.CYAN}{char} Finishing touches...{Colors.END}")
+            spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+            for i in range(15):
+                sys.stdout.write(f"\r{Colors.CYAN}{spinner[i % len(spinner)]} Finalizing...{Colors.END}")
                 sys.stdout.flush()
-                time.sleep(0.1)
+                time.sleep(0.08)
             
-            sys.stdout.write("\r" + " " * 40 + "\r")
-            sys.stdout.flush()
-            
-            print(f"{Colors.GREEN}✔ Success!{Colors.END} Project {Colors.BOLD}{name}{Colors.END} is ready.")
-            print(f"{Colors.BLUE}→ Next step:{Colors.END} cd {name}\n")
+            print(f"\r{Colors.GREEN}✔ Success!{Colors.END} Project {Colors.BOLD}{name}{Colors.END} is ready.")
+            print(f"{Colors.BLUE}➜{Colors.END} {Colors.DIM}cd{Colors.END} {name}\n")
             
         except Exception as e:
-            print(f"\n{Colors.RED}✖ An unexpected error occurred: {e}{Colors.END}")
+            print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}")
     else:
-        print(f"{Colors.RED}Invalid choice!{Colors.END}")
+        print(f"{Colors.RED}✖ Invalid choice!{Colors.END}")
