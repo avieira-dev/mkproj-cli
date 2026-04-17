@@ -2,7 +2,9 @@ import os
 import sys
 import time
 from utils.colors import Colors
-from utils.prompter import get_readme_data, get_user_data, get_module_go
+from utils.prompter import (
+    get_readme_data, get_user_data, 
+    get_module_go, get_java_data)
 from languages import (
     setup_python, setup_cpp, setup_c, 
     setup_web, setup_java, setup_go,
@@ -68,17 +70,21 @@ def command_new():
         # Specific data
         context = {}
         if lang_name == "Python":
-            context['user'], context['email'] = get_user_data()
+            context['user_python'], context['email'] = get_user_data()
         if lang_name == "Go (Golang)":
             context['module'] = get_module_go(name)
+        if lang_name == "Java":
+            context['user_java'], context['gui_choice'] = get_java_data()
 
         try:
             print(f"\n{Colors.YELLOW}⚙ Generating {Colors.BOLD}{lang_name}{Colors.END} structure...{Colors.END}")
             
             if lang_name == "Python":
-                setup_python(name, readme_title, readme_description, context['user'], context['email'])
+                setup_python(name, readme_title, readme_description, context['user_python'], context['email'])
             elif lang_name == "Go (Golang)":
                 setup_go(name, readme_title, readme_description, context['module'])
+            elif lang_name == "Java":
+                setup_java(name, readme_title, readme_description, context['user_java'], context['gui_choice'])
             else:
                 setup_func(name, readme_title, readme_description)
 
