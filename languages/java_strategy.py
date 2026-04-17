@@ -1,96 +1,37 @@
 import os
-from utils.file_system import create_directory, create_file
+from utils.file_system import create_directory, create_from_template
 
-GITIGNORE_CONTENT = """# Java - Compiled files (Byte-code)
-*.class
-*.log
-*.ctxt
+def setup_java(name, readme_title, readme_description, user_input, gui_choice):
+    project_clean = name.replace(" ", "").replace("-", "").replace("_", "").lower()
 
-# Package Files (Binaries)
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+    if "." in user_input:
+        base_package = user_input.replace(" ", "").replace("-", "_")
+        full_package_name = f"{base_package}.{project_clean}"
+    else:
+        user_clean = user_input.replace(" ", "").replace("-", "").replace("_", "")
+        full_package_name = f"com.{user_clean}.{project_clean}"
 
-# Build directories (Maven / Gradle / Bin)
-bin/
-build/
-target/
-out/
-.gradle/
-.m2/
+    # Convert the package (br.com.test) into folders (br/com/test)
+    package_dir_path = full_package_name.replace(".", os.sep)
+    full_package_path = os.path.join(name, "src", "main", "java", package_dir_path)
 
-# IDEs and Editors (VS Code, IntelliJ, Eclipse)
-.settings/
-.project
-.classpath
-.factorypath
-.idea/
-*.iml
-*.iws
-.vscode/
+    # Data to fill in the templates
+    context = {
+        "java_package": f"package {full_package_name};",
+        "readme_title": readme_title,
+        "readme_description": readme_description
+    }
 
-# OS and Crash logs
-.DS_Store
-Thumbs.db
-hs_err_pid*
-replay_pid*
-"""
-
-def setup_java(name, readme_title, readme_description):
-    # Package configuration
-    user_part = input("Enter developer/org name (default: user): ").strip().lower() or "user"
-    user_clean = user_part.replace("-", "_").replace(" ", "")
-    project_clean = name.replace("-", "_").replace(" ", "")
-
-    # Project type
-    print("\nSelect Java template:")
-    print(" 1) Console Application (Simple)")
-    print(" 2) GUI Application (Swing/MVC structure)")
-    gui_choice = input("Enter selection (default: 1): ") or "1"
-
-    # Basic paths
-    package_rel_path = os.path.join("src", "main", "java", "com", user_clean, project_clean)
-    full_package_path = os.path.join(name, package_rel_path)
-
-    # Creation of the common structure
+    # Creation of folders
     create_directory(full_package_path)
     create_directory(os.path.join(name, "src", "main", "resources"))
 
-    # Initial code
-    java_content = f"""package com.{user_clean}.{project_clean};
-
-/**
- * Main entry point for the {name} application.
- */
-public class Main {{
-    public static void main(String[] args) {{
-        // Print a welcome message to the console
-        System.out.println("Hello from {name}!");
-    }}
-}}
-"""
-    
-    readme_content = f"""# {readme_title}
-
-> {readme_description}
-
-## Table of Contents
-"""
-
-    # Specific logic
+    # Specific logic for MVC
     if gui_choice == "2":
-        # Structure for GUI (MVC)
-        create_directory(os.path.join(full_package_path, "view"))
-        create_directory(os.path.join(full_package_path, "controller"))
-        create_directory(os.path.join(full_package_path, "model"))
+        for folder in ["model", "view", "controller"]:
+            create_directory(os.path.join(full_package_path, folder))
         
-    # Create the Main.java file
-    create_file(os.path.join(full_package_path, "Main.java"), java_content)
-
-    # General files
-    create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
-    create_file(os.path.join(name, "README.md"), readme_content)
+    # Creation of files from templates
+    create_from_template("java/java_main.txt", os.path.join(full_package_path, "Main.java"), context)  
+    create_from_template("java/java_gitignore.txt", os.path.join(name, ".gitignore"), context)
+    create_from_template("java/java_readme.txt", os.path.join(name, "README.md"), context)
