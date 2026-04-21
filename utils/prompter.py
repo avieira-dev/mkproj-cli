@@ -10,6 +10,16 @@ def get_user_data():
     
     return "Your Name", "you@example.com"
 
+def get_web_data():
+    print(f"\n{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Would you like to add your name to the package.json file?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+
+    if input().lower().strip() == "y":
+        user = input(f"  {Colors.DIM}↳{Colors.END} Username: ").strip() or "Your Name"
+        return user
+    
+    return "Your Name"
+
+
 def get_readme_data(default_name):
     print(f"{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Customize README?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
 
