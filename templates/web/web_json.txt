@@ -1,0 +1,9 @@
+{
+    "name": "$project_name_json",
+    "version": "1.0.0",
+    "description": "Web project",
+    "main": "index.html",
+    "scripts": {
+    },
+    "author": "$username"
+}
