@@ -21,7 +21,7 @@ def print_banner():
     print(fr"|_| |_| |_|_|\_\ .__/|_|  \___// |")
     print(fr"               |_|            |__/ {Colors.END}")
     print()
-    print(f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v1.2.0 {Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n")
+    print(f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v1.3.0 {Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n")
 
 def main():
     # Enable ANSI colors on Windows terminals
