@@ -19,6 +19,16 @@ def get_web_data():
     
     return "Your Name"
 
+def get_rust_data():
+    print(f"\n{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Do you want to add your name and email to the Cargo.toml file?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+
+    if input().lower().strip() == "y":
+        user = input(f"  {Colors.DIM}↳{Colors.END} Username: ").strip() or "Your Name"
+        email = input(f"  {Colors.DIM}↳{Colors.END} Email: ").strip() or "you@example.com"
+        license = input(f"  {Colors.DIM}↳{Colors.END} License: ").strip() or "License"
+        return user, email, license
+    
+    return "Your Name", "you@example.com", "License"
 
 def get_readme_data(default_name):
     print(f"{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Customize README?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
