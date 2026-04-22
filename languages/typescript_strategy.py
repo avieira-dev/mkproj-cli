@@ -1,108 +1,24 @@
 import os
-from utils.file_system import create_directory, create_file
-
-GITIGNORE_CONTENT = """# Dependencies
-node_modules/
-/dist
-/build
-
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# IDEs and editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Operating System and logs
-.DS_Store
-Thumbs.db
-*.log
-npm-debug.log*
-yarn-debug.log*
-"""
-
-TSCONFIG_CONTENT = """{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
-}
-"""
+from utils.file_system import create_directory, create_from_template
 
 def setup_typescript(name,  readme_title, readme_description):
-    safe_name = name.replace(" ", "-").replace("_", "-").lower()
+    project_name = name.replace(" ", "-").replace("_", "-").lower()
 
-    # Directories
-    create_directory(os.path.join(name, "src"))
-    create_directory(os.path.join(name, "tests"))
+    # Create directories
+    for folder in ["src", "tests"]:
+        create_directory(os.path.join(name, folder))
 
-    # Contents of package.json 
-    package_json = f"""{{
-"name": "{safe_name}",
-"version": "1.0.0",
-"description": "{readme_description}",
-"main": "dist/index.js",
-"scripts": {{
-    "build": "tsc",
-    "dev": "ts-node src/index.ts",
-    "start": "node dist/index.js"
-}},
-"license": "ISC"
-    }}
-"""
+    # Data to fill in the templates
+    context = {
+        "project_name": project_name,
+        "description": readme_description,
+        "readme_title": readme_title,
+        "readme_description": readme_description    
+    }
     
-    # Content of index.ts
-    index_ts = f"""function greet(): string {{
-    return "Hello from TypeScript!";    
-}}
-
-console.log(greet());
-"""
-
-    # README content
-    readme_content = f"""# {readme_title}
-
-> {readme_description}
-
-## Table of Contents
-- [Usage](#usage)
-
-## Usage
-1. **Install the dependencies:**
-
-    ```bash
-    npm install -D typescript ts-node @types/node
-    ```
-
-2. Development (Rapid):
-
-    ```bash
-    npm run dev
-    ```
-
-3. Production (Final):
-
-    ```bash
-    npm run build
-    npm start
-    ```
-"""
-    
-    # Files
-    create_file(os.path.join(name, "package.json"), package_json)
-    create_file(os.path.join(name, "tsconfig.json"), TSCONFIG_CONTENT)
-    create_file(os.path.join(name, "src", "index.ts"), index_ts)
-    create_file(os.path.join(name, "README.md"), readme_content)
-    create_file(os.path.join(name, ".gitignore"), GITIGNORE_CONTENT)
+    # Create files
+    create_from_template("typescript/ts_config.txt", os.path.join(name, "tsconfig.json"), context)
+    create_from_template("typescript/ts_package.txt", os.path.join(name, "package.json"), context)
+    create_from_template("typescript/ts_gitignore.txt", os.path.join(name, ".gitignore"), context)
+    create_from_template("typescript/ts_readme.txt", os.path.join(name, "README.md"), context)
+    create_from_template("typescript/ts_index.txt", os.path.join(name, "src", "index.ts"), context)
