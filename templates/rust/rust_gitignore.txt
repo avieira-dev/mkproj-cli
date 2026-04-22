@@ -1,0 +1,19 @@
+# Build 
+/target/
+
+# Compiler temporary files
+**/*.rs.bk
+
+# IDE / Editor
+.vscode/
+.idea/
+*.vcxproj*
+*.sln
+*.user
+*.filters
+
+# OS
+*~
+.DS_Store
+Thumbs.db
+.cache/
