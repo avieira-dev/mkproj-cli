@@ -5,7 +5,7 @@ from utils.colors import Colors
 from utils.prompter import (
     get_readme_data, get_user_data, 
     get_module_go, get_java_data,
-    get_web_data)
+    get_web_data, get_rust_data)
 from languages import (
     setup_python, setup_cpp, setup_c, 
     setup_web, setup_java, setup_go,
@@ -71,25 +71,29 @@ def command_new():
         # Specific data
         context = {}
         if lang_name == "Python":
-            context['user_python'], context['email'] = get_user_data()
+            context['user'], context['email'] = get_user_data()
         if lang_name == "Go (Golang)":
             context['module'] = get_module_go(name)
         if lang_name == "Java":
-            context['user_java'], context['gui_choice'] = get_java_data()
+            context['user'], context['gui_choice'] = get_java_data()
         if lang_name == "Web (HTML/CSS/JS)":
-            context['user_web'] = get_web_data()
+            context['user'] = get_web_data()
+        if lang_name == "Rust":
+            context['user'], context['email'], context['license'] = get_rust_data()
 
         try:
             print(f"\n{Colors.YELLOW}⚙ Generating {Colors.BOLD}{lang_name}{Colors.END} structure...{Colors.END}")
             
             if lang_name == "Python":
-                setup_python(name, readme_title, readme_description, context['user_python'], context['email'])
+                setup_python(name, readme_title, readme_description, context['user'], context['email'])
             elif lang_name == "Go (Golang)":
                 setup_go(name, readme_title, readme_description, context['module'])
             elif lang_name == "Java":
-                setup_java(name, readme_title, readme_description, context['user_java'], context['gui_choice'])
+                setup_java(name, readme_title, readme_description, context['user'], context['gui_choice'])
             elif lang_name == 'Web (HTML/CSS/JS)':
-                setup_web(name, readme_title, readme_description, context['user_web'])
+                setup_web(name, readme_title, readme_description, context['user'])
+            elif lang_name == 'Rust':
+                setup_rust(name, readme_title, readme_description, context['user'], context['email'], context['license'])
             else:
                 setup_func(name, readme_title, readme_description)
 
