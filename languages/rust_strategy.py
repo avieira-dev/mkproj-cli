@@ -1,3 +1,13 @@
+"""
+FILE: languages/rust_strategy.py
+DESCRIPTION: Strategy for bootstrapping Rust binary projects.
+RESPONSIBILITIES:
+  - Create the standard Rust project layout (Cargo.toml and src/main.rs)
+  - Normalize project names to snake_case for Cargo compatibility
+  - Format author information (Name <email>) and license metadata
+  - Generate base templates for immediate compilation with 'cargo run'
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 

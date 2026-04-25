@@ -1,3 +1,13 @@
+"""
+FILE: languages/go_strategy.py
+DESCRIPTION: Strategy for bootstrapping Go (Golang) projects.
+RESPONSIBILITIES:
+  - Implement the standard Go Project Layout (cmd/, internal/, pkg/)
+  - Initialize the Go module system by creating the go.mod file
+  - Setup a clean entry point in cmd/main.go
+  - Normalize directory naming for Go workspace compatibility
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 

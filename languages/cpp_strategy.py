@@ -1,3 +1,13 @@
+"""
+FILE: languages/cpp_strategy.py
+DESCRIPTION: Strategy for bootstrapping C++ projects with CMake support.
+RESPONSIBILITIES:
+  - Implement a standard C++ directory layout (src, include, build, external)
+  - Normalize project names to PascalCase for class-like naming conventions
+  - Setup the CMake build system configuration (CMakeLists.txt)
+  - Organize source code (src/core) and headers (include/core) separation
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 

@@ -1,3 +1,13 @@
+"""
+FILE: languages/c_language_strategy.py
+DESCRIPTION: Strategy for bootstrapping C language projects with CMake.
+RESPONSIBILITIES:
+  - Create a standard C project structure (src, include, build)
+  - Setup a cross-platform build system using CMakeLists.txt
+  - Normalize project identifiers to PascalCase for headers and build targets
+  - Generate a clean main.c entry point and base documentation
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 

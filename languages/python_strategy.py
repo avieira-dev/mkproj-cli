@@ -1,3 +1,13 @@
+"""
+FILE: languages/python_strategy.py
+DESCRIPTION: Strategy for bootstrapping modern Python projects.
+RESPONSIBILITIES:
+  - Implement a clean 'src' layout for better package management
+  - Normalize project and directory names (kebab-case vs snake_case)
+  - Generate modern PEP 621 compliant configuration (pyproject.toml)
+  - Create standard directories for documentation, scripts, and testing
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 

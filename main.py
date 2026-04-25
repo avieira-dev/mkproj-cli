@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
 
+"""
+FILE: main.py
+VERSION: 1.4.0
+DESCRIPTION: Main entry point for the mkproj-cli tool.
+RESPONSIBILITIES:
+  - Initialize the terminal environment (ANSI support)
+  - Parse CLI arguments and route to specific commands (new, help)
+  - Display the application branding (Banner)
+  - Manage global exceptions and clean up resources on cancellation
+"""
+
 import sys
 import os
 import shutil
@@ -22,7 +33,7 @@ def print_banner():
     print(fr"|_| |_| |_|_|\_\ .__/|_|  \___// |")
     print(fr"               |_|            |__/ {Colors.END}")
     print()
-    print(f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v1.3.0 {Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n")
+    print(f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v1.4.0 {Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n")
 
 def main():
     # Enable ANSI colors on Windows terminals
@@ -46,18 +57,13 @@ def main():
             print(f"{Colors.RED}✖ Unknown command: {command}{Colors.END}")
             print(f"{Colors.DIM}Hint: Type 'mkproj --help' to see available commands.{Colors.END}")
     except KeyboardInterrupt:
-        # If the user presses Ctrl + C (end the process)
         print(f"\n\n{Colors.YELLOW}⚠ Operation cancelled.{Colors.END}")
-
         if command == "new" and current_project and os.path.exists(current_project):
-            print(f"{Colors.DIM}  ↳ Cleaning up partial files in {Colors.BOLD}{current_project}...{Colors.END}")
             try:
                 shutil.rmtree(current_project)
-                print(f"{Colors.GREEN}  ✔ Cleanup complete. No traces left.{Colors.END}")
-            except Exception as e:
-                print(f"{Colors.RED}  ✖ Cleanup failed: {e}{Colors.END}")
-        
-        print(f"\n{Colors.CYAN}See you later!{Colors.END}")
+                print(f"{Colors.DIM}  ↳ Partially created files removed.{Colors.END}")
+            except: pass
+        print(f"{Colors.CYAN}Bye!{Colors.END}")
         sys.exit(0)
 
 if __name__ == "__main__":

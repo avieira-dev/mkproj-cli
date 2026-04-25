@@ -1,10 +1,19 @@
+"""
+FILE: languages/web_strategy.py
+DESCRIPTION: Strategy for bootstrapping Web projects (HTML/CSS/JS).
+RESPONSIBILITIES:
+  - Create a standard frontend directory structure (assets, components, pages)
+  - Format project names for specific contexts (kebab-case for JSON, Title Case for HTML)
+  - Map and inject user data into Web-specific templates
+  - Generate core files: index.html, style.css, script.js, and package.json
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 
 def setup_web(name, readme_title, readme_description, username):
     project_name_json = name.replace(" ", "-").replace("_", "-").lower()
-    project_name_index = " ".join(word.capitalize() for word in name.replace("-", " ").replace("_", " ").split()
-)
+    project_name_index = " ".join(word.capitalize() for word in name.replace("-", " ").replace("_", " ").split())
 
     # Create directories
     for folder in ["src/assets/css", "src/assets/js", "src/assets/images", "src/assets/fonts", "src/assets/favicon", "src/assets/icons", "src/components", "src/pages"]:

@@ -1,3 +1,13 @@
+"""
+FILE: languages/java_strategy.py
+DESCRIPTION: Strategy for bootstrapping Java projects with Maven-style layout.
+RESPONSIBILITIES:
+  - Dynamically generate deep package structures from user domains
+  - Map dots in package names to system-specific directory separators
+  - Implement conditional scaffolding for Console or GUI (Swing/MVC) projects
+  - Manage Java-specific boilerplate including 'package' declarations
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 

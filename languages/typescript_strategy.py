@@ -1,3 +1,13 @@
+"""
+FILE: languages/typescript_strategy.py
+DESCRIPTION: Strategy for bootstrapping TypeScript (Node.js) projects.
+RESPONSIBILITIES:
+  - Create the base project structure (src and tests directories).
+  - Normalize project names for the package.json manifest.
+  - Generate TypeScript-specific configuration (tsconfig.json).
+  - Setup a ready-to-use entry point in TypeScript.
+"""
+
 import os
 from utils.file_system import create_directory, create_from_template
 
