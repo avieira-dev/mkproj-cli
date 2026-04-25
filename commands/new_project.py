@@ -5,7 +5,8 @@ from utils.colors import Colors
 from utils.prompter import (
     get_readme_data, get_user_data, 
     get_module_go, get_java_data,
-    get_web_data, get_rust_data)
+    get_web_data, get_rust_data,
+    git_automation)
 from languages import (
     setup_python, setup_cpp, setup_c, 
     setup_web, setup_java, setup_go,
@@ -104,9 +105,16 @@ def command_new():
                 time.sleep(0.08)
             
             print(f"\r{Colors.GREEN}✔ Success!{Colors.END} Project {Colors.BOLD}{name}{Colors.END} is ready.")
+
+            # Git automation
+            git_automation(name)
+
             print(f"{Colors.BLUE}➜{Colors.END} {Colors.DIM}cd{Colors.END} {name}\n")
             
+            return name
         except Exception as e:
             print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}")
+            return None
     else:
         print(f"{Colors.RED}✖ Invalid choice!{Colors.END}")
+        return None
