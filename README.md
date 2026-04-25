@@ -36,6 +36,9 @@
     <br>
     <em>Automatic directory and file generation</em><br>
     <img src="./assets/screenshots/screenshot-002.png" alt="mkproj-cli interface demo 2" width="600">
+    <br>
+    <em>Git automation, project summary and next steps</em><br>
+    <img src="./assets/screenshots/screenshot-003.png" alt="mkproj-cli interface demo 3" width="600">
 </p>
 
 ## Features
