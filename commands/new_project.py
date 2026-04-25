@@ -1,3 +1,14 @@
+"""
+FILE: commands/new_project.py
+DESCRIPTION: Orchestrator for the project creation workflow.
+RESPONSIBILITIES:
+  - Validate project names and directory availability
+  - Render the interactive CLI menu for language selection
+  - Coordinate data collection via prompter and route to specific language strategies
+  - Provide visual feedback (spinners/summaries) and final Git automation
+  - Handle the high-level project assembly sequence
+"""
+
 import os
 import sys
 import time
@@ -13,7 +24,6 @@ from languages import (
     setup_rust, setup_typescript
 )
 
-# Mapping of available language strategies
 STRATEGIES = {
     "1": ("Python", setup_python, "🐍"),
     "2": ("C++", setup_cpp, "💻"),
@@ -26,42 +36,36 @@ STRATEGIES = {
 }
 
 def command_new():
-    # Check if project name was provided
     if len(sys.argv) < 3:
         print(f"{Colors.YELLOW}Usage: mkproj new <project_name>{Colors.END}")
-        return
+        return None
     
     name = sys.argv[2].strip()
-    # Check for empty string
-    if not name:
-        print(f"{Colors.RED}Error: Project name cannot be empty.{Colors.END}")
-        return
-    
-    # Check if directory already exists
-    if os.path.exists(name):
-        print(f"\n{Colors.RED}Error: Directory '{name}' already exists!{Colors.END}")
-        return
+    if not name or os.path.exists(name):
+        print(f"\n{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}")
+        return None
     
     print(f"{Colors.CYAN}🚀 Creating project:{Colors.END} {Colors.BOLD}{name}{Colors.END}\n")
 
-    # Total internal width of the box
-    WIDTH = 42
-
-    print(f"{Colors.PURPLE}┌──────────────────────────────────────────┐{Colors.END}")
-
-    header = " Select the language strategy:"
-
-    print(f"{Colors.PURPLE}│{Colors.END}{Colors.BOLD}{header.ljust(WIDTH)}{Colors.END}{Colors.PURPLE}│{Colors.END}")
-    
-    print(f"{Colors.PURPLE}├──────────────────────────────────────────┤{Colors.END}")
+    WIDTH = 45
+    print(f"{Colors.BLUE}┌{'─' * (WIDTH-2)}┐{Colors.END}")
+    header_text = " Select Strategy:"
+    print(f"{Colors.BLUE}│{Colors.END} {Colors.BOLD}{header_text.ljust(WIDTH-4)}{Colors.END} {Colors.BLUE}│{Colors.END}")
+    print(f"{Colors.BLUE}├{'─' * (WIDTH-2)}┤{Colors.END}")
 
     for key, (lang_name, _, icon) in STRATEGIES.items():
-        base_text = f"  {key}) {lang_name}"
-        padding = " " * (WIDTH - len(base_text) - 3)
-        line_content = f"  {Colors.CYAN}{key}){Colors.END} {icon} {lang_name}{padding}"
-        print(f"{Colors.PURPLE}│{Colors.END}{line_content}{Colors.PURPLE}│{Colors.END}")
+        offset = 1 if len(icon) == 1 else 0
+        
+        if lang_name == "C":
+            offset = 1
+        
+        prefix = f"  {Colors.CYAN}{key}){Colors.END} {icon} "
+        padding_size = WIDTH - len(lang_name) - 11 + offset
+        padding = " " * padding_size
+        
+        print(f"{Colors.BLUE}│{Colors.END}{prefix}{lang_name}{padding}{Colors.BLUE}│{Colors.END}")
 
-    print(f"{Colors.PURPLE}└──────────────────────────────────────────┘{Colors.END}")
+    print(f"{Colors.BLUE}└{'─' * (WIDTH-2)}┘{Colors.END}")
 
     choice = input(f"\n{Colors.GREEN}❯{Colors.END} {Colors.BOLD}Selection:{Colors.END} ")
 
@@ -69,47 +73,44 @@ def command_new():
         lang_name, setup_func, _ = STRATEGIES[choice]
         readme_title, readme_description = get_readme_data(name)
 
-        # Specific data
         context = {}
-        if lang_name == "Python":
-            context['user'], context['email'] = get_user_data()
-        if lang_name == "Go (Golang)":
-            context['module'] = get_module_go(name)
-        if lang_name == "Java":
-            context['user'], context['gui_choice'] = get_java_data()
-        if lang_name == "Web (HTML/CSS/JS)":
-            context['user'] = get_web_data()
-        if lang_name == "Rust":
-            context['user'], context['email'], context['license'] = get_rust_data()
+        if lang_name == "Python": context['user'], context['email'] = get_user_data()
+        elif lang_name == "Go (Golang)": context['module'] = get_module_go(name)
+        elif lang_name == "Java": context['user'], context['gui_choice'] = get_java_data()
+        elif lang_name == "Web (HTML/CSS/JS)": context['user'] = get_web_data()
+        elif lang_name == "Rust": context['user'], context['email'], context['license'] = get_rust_data()
 
         try:
-            print(f"\n{Colors.YELLOW}⚙ Generating {Colors.BOLD}{lang_name}{Colors.END} structure...{Colors.END}")
+            print(f"\n{Colors.YELLOW}⚙ Building project...{Colors.END}")
             
-            if lang_name == "Python":
-                setup_python(name, readme_title, readme_description, context['user'], context['email'])
-            elif lang_name == "Go (Golang)":
-                setup_go(name, readme_title, readme_description, context['module'])
-            elif lang_name == "Java":
-                setup_java(name, readme_title, readme_description, context['user'], context['gui_choice'])
-            elif lang_name == 'Web (HTML/CSS/JS)':
-                setup_web(name, readme_title, readme_description, context['user'])
-            elif lang_name == 'Rust':
-                setup_rust(name, readme_title, readme_description, context['user'], context['email'], context['license'])
-            else:
-                setup_func(name, readme_title, readme_description)
+            # Setup execution
+            if lang_name == "Python": setup_python(name, readme_title, readme_description, context['user'], context['email'])
+            elif lang_name == "Go (Golang)": setup_go(name, readme_title, readme_description, context['module'])
+            elif lang_name == "Java": setup_java(name, readme_title, readme_description, context['user'], context['gui_choice'])
+            elif lang_name == 'Web (HTML/CSS/JS)': setup_web(name, readme_title, readme_description, context['user'])
+            elif lang_name == 'Rust': setup_rust(name, readme_title, readme_description, context['user'], context['email'], context['license'])
+            else: setup_func(name, readme_title, readme_description)
 
             spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
-            for i in range(15):
-                sys.stdout.write(f"\r{Colors.CYAN}{spinner[i % len(spinner)]} Finalizing...{Colors.END}")
+            for i in range(12):
+                sys.stdout.write(f"\r{Colors.CYAN}{spinner[i % len(spinner)]}{Colors.END} {Colors.DIM}Applying templates...{Colors.END}")
                 sys.stdout.flush()
                 time.sleep(0.08)
             
-            print(f"\r{Colors.GREEN}✔ Success!{Colors.END} Project {Colors.BOLD}{name}{Colors.END} is ready.")
+            sys.stdout.write(f"\r{Colors.GREEN}✔{Colors.END} Project structure generated!     \n")
 
             # Git automation
-            git_automation(name)
+            git_status = git_automation(name)
 
-            print(f"{Colors.BLUE}➜{Colors.END} {Colors.DIM}cd{Colors.END} {name}\n")
+            # Final summary
+            print(f"\n{Colors.BLUE}✔ {Colors.END}{Colors.CYAN}Done! Project {Colors.BOLD}{name}{Colors.END} is ready.{Colors.END}")
+            print(f"  {Colors.DIM} Language: {Colors.END}{lang_name}")
+            print(f"  {Colors.DIM} Git: {Colors.END}{'Initialized ✔' if git_status else 'Skipped ⚪'}")
+            print(f"  {Colors.DIM} Path: {Colors.END}{os.path.abspath(name)}")
+
+            print(f"\n{Colors.BLUE}🚀 Next steps:{Colors.END}")
+            print(f"  {Colors.CYAN} $ cd{Colors.END} {name}")
+            print(f"  {Colors.CYAN} $ code .{Colors.END}\n")
             
             return name
         except Exception as e:

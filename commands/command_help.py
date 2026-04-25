@@ -1,3 +1,13 @@
+"""
+FILE: commands/command_help.py
+DESCRIPTION: Documentation and usage manual for the mkproj-cli.
+RESPONSIBILITIES:
+  - Display syntax instructions for the command-line interface
+  - List all available commands with brief descriptions
+  - Provide real-world usage examples for the user
+  - Show project authorship and social links
+"""
+
 from utils.colors import Colors
 
 def command_help():

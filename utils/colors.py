@@ -1,3 +1,13 @@
+"""
+FILE: utils/colors.py
+DESCRIPTION: Centralized ANSI escape sequences for terminal styling.
+RESPONSIBILITIES:
+  - Provide a consistent color palette for the CLI (Blue, Cyan, etc.)
+  - Define text formatting styles (Bold, Dim, Underline)
+  - Support background colors for UI elements like badges and banners
+  - Enable the 'END' reset token to prevent color bleeding into user input
+"""
+
 class Colors:
     BLUE = '\033[94m'
     CYAN = '\033[96m'

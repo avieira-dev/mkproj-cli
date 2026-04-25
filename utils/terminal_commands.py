@@ -1,3 +1,11 @@
+"""
+FILE: utils/terminal_commands.py
+DESCRIPTION: Safe wrapper for executing system subprocesses.
+RESPONSIBILITIES:
+  - Check if executables exist in system PATH
+  - Execute commands in specific directories
+"""
+
 import subprocess
 import shutil
 
