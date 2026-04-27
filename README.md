@@ -3,7 +3,7 @@
 > A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.
 
 <p align="center">
-    <img src="https://img.shields.io/badge/version-v1.2.0-4c1"/>
+    <img src="https://img.shields.io/badge/version-v1.4.0-4c1"/>
     <img src="https://img.shields.io/badge/status-stable-2ea44f"/>
     <img src="https://img.shields.io/badge/maintenance-active-1f6feb"/>
     <img src="https://img.shields.io/badge/language-Python-3572A5"/>
@@ -11,8 +11,7 @@
 </p>
 
 > [!IMPORTANT]  
-> **mkproj** is now in stable version v1.2.0. We are continuously adding support for new
-> languages and improving the scaffolding logic.
+> **mkproj** is now in stable version **v1.4.0**. This release introduces a complete UI overhaul, full project documentation, and integrated Git automation.
 
 ## Table of Contents
 
@@ -43,14 +42,12 @@
 
 ## Features
 
-- **Multi-language support**: Python, C/C++, Java, Go, Rust, TypeScript, and Web.
-- Modular architecture.
-- **Smart scaffolding** (automatically generates):
-  - Directories
-  - Build files
-  - Documentation
-- Auto-creates `.gitignore` based on the selected language.
-- Prevents accidental overwrites of existing projects.
+- **Multi-language support**: Python, C, C++, Go, Java, Rust, Typescript and Web.
+- **Integrated Git Automation**: Automatically initializes repositories and creates the first commit.
+- **Smart Scaffolding**: Generates professional directory trees, build files (CMake, Cargo, Go Mod, etc.), and documentation.
+- **Refined UI**: Interactive menus with icons, progress spinners, and clear next-step guidance.
+- **Modern Standards**: Follows PEP 621 for Python, Maven-style for Java, and standard Go project layouts.
+- **Safety First**: Prevents accidental overwrites and validates project names.
 
 ## Installation
 
