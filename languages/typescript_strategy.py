@@ -11,8 +11,12 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_typescript(name,  readme_title, readme_description):
+def setup_typescript(name, readme_title, readme_description, username, license, year):
     project_name = name.replace(" ", "-").replace("_", "-").lower()
+
+    license_path = "licenses/mit.txt" if license == "MIT" else \
+                   "licenses/apache.txt" if license == "Apache" else \
+                   "licenses/gpl.txt" if license == "GNU GPL" else "licenses/explanation.txt"
 
     # Create directories
     for folder in ["src", "tests"]:
@@ -23,7 +27,9 @@ def setup_typescript(name,  readme_title, readme_description):
         "project_name": project_name,
         "description": readme_description,
         "readme_title": readme_title,
-        "readme_description": readme_description    
+        "readme_description": readme_description,
+        "year": year,
+        "holder": username
     }
     
     # Create files
@@ -32,3 +38,4 @@ def setup_typescript(name,  readme_title, readme_description):
     create_from_template("typescript/ts_gitignore.txt", os.path.join(name, ".gitignore"), context)
     create_from_template("typescript/ts_readme.txt", os.path.join(name, "README.md"), context)
     create_from_template("typescript/ts_index.txt", os.path.join(name, "src", "index.ts"), context)
+    create_from_template(license_path, os.path.join(name, "LICENSE"), context)

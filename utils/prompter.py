@@ -12,6 +12,13 @@ import os
 from utils.colors import Colors
 from utils.terminal_commands import run_command
 
+def welcome_user():
+    print(f"{Colors.CYAN}👋 Hello! To get started, please tell me:{Colors.END}")
+    print(f"{Colors.PURPLE}?{Colors.END} {Colors.BOLD}What's your full name?{Colors.END}", end=" ")
+    
+    name = input(f"{Colors.GREEN}❯{Colors.END} ").strip() or "Your Name"
+    return name
+
 def _ask_basic_info(question_text):
     print(f"\n{Colors.PURPLE}?{Colors.END} {Colors.BOLD}{question_text}{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
     if input(Colors.END).lower().strip() == "y":
@@ -30,8 +37,7 @@ def get_web_data():
 
 def get_rust_data():
     user, email = _ask_basic_info("Add info to Cargo.toml?")
-    lic = input(f"  {Colors.DIM}↳ License: {Colors.END}").strip() or "MIT"
-    return user, email, lic
+    return user, email
 
 def get_readme_data(default_name):
     print(f"{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Customize README?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
@@ -71,3 +77,18 @@ def git_automation(name):
             return True
         print(f"  {Colors.DIM}↳{Colors.END} {Colors.RED} Git failed.{Colors.END}")
     return False
+
+def add_license():
+    """
+    Asks the user if they want to add a license and returns the selection.
+    Standardized to match the prompter.py design language.
+    """
+    print(f"\n{Colors.PURPLE}?{Colors.END} {Colors.BOLD}Add a license to the project?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    
+    choice = "4"
+    
+    if input(Colors.END).lower().strip() == "y":
+        print(f"  {Colors.DIM}1) MIT  2) Apache 2.0  3) GNU GPL v3.0  4) None{Colors.END}")
+        choice = input(f"  {Colors.DIM}↳ Selection [1-4]: {Colors.END}").strip() or "1"
+    
+    return choice

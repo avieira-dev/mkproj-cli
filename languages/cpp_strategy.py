@@ -11,8 +11,12 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_cpp(name, readme_title, readme_description):
+def setup_cpp(name, readme_title, readme_description, username, license, year):
     class_name = "".join(p.capitalize() for p in name.replace("_", "-").split("-"))
+
+    license_path = "licenses/mit.txt" if license == "MIT" else \
+                   "licenses/apache.txt" if license == "Apache" else \
+                   "licenses/gpl.txt" if license == "GNU GPL" else "licenses/explanation.txt"
 
     # Create directories
     for folder in ["src/core", "include/core", "build", "tests", "external", "assets", "docs"]:
@@ -22,7 +26,9 @@ def setup_cpp(name, readme_title, readme_description):
     context = {
         "project_name": class_name,
         "readme_title": readme_title,
-        "readme_description": readme_description  
+        "readme_description": readme_description,
+        "year": year,
+        "holder": username
     }
 
     # Create files
@@ -30,4 +36,5 @@ def setup_cpp(name, readme_title, readme_description):
     create_from_template("cpp/cpp_gitignore.txt", os.path.join(name, ".gitignore"), context)
     create_from_template("cpp/cpp_readme.txt", os.path.join(name, "README.md"), context)
     create_from_template("cpp/cpp_main.txt", os.path.join(name, "src", "core", "main.cpp"), context)
+    create_from_template(license_path, os.path.join(name, "LICENSE"), context)
     

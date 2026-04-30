@@ -12,12 +12,14 @@ RESPONSIBILITIES:
 import os
 import sys
 import time
+from datetime import datetime
 from utils.colors import Colors
 from utils.prompter import (
     get_readme_data, get_user_data, 
     get_module_go, get_java_data,
     get_web_data, get_rust_data,
-    git_automation)
+    git_automation, add_license,
+    welcome_user)
 from languages import (
     setup_python, setup_cpp, setup_c, 
     setup_web, setup_java, setup_go,
@@ -36,6 +38,7 @@ STRATEGIES = {
 }
 
 def command_new():
+    # Initial argument validation
     if len(sys.argv) < 3:
         print(f"{Colors.YELLOW}Usage: mkproj new <project_name>{Colors.END}")
         return None
@@ -44,8 +47,18 @@ def command_new():
     if not name or os.path.exists(name):
         print(f"\n{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}")
         return None
+
+    full_name = welcome_user() 
+    year = str(datetime.now().year)
+
+    context = {
+        "user": full_name,
+        "holder": full_name,
+        "email": "you@example.com",
+        "year": year
+    }
     
-    print(f"{Colors.CYAN}🚀 Creating project:{Colors.END} {Colors.BOLD}{name}{Colors.END}\n")
+    print(f"\n{Colors.CYAN}🚀 Creating project:{Colors.END} {Colors.BOLD}{name}{Colors.END}\n")
 
     WIDTH = 45
     print(f"{Colors.BLUE}┌{'─' * (WIDTH-2)}┐{Colors.END}")
@@ -55,14 +68,11 @@ def command_new():
 
     for key, (lang_name, _, icon) in STRATEGIES.items():
         offset = 1 if len(icon) == 1 else 0
-        
-        if lang_name == "C":
-            offset = 1
+        if lang_name == "C": offset = 1
         
         prefix = f"  {Colors.CYAN}{key}){Colors.END} {icon} "
         padding_size = WIDTH - len(lang_name) - 11 + offset
         padding = " " * padding_size
-        
         print(f"{Colors.BLUE}│{Colors.END}{prefix}{lang_name}{padding}{Colors.BLUE}│{Colors.END}")
 
     print(f"{Colors.BLUE}└{'─' * (WIDTH-2)}┘{Colors.END}")
@@ -73,23 +83,43 @@ def command_new():
         lang_name, setup_func, _ = STRATEGIES[choice]
         readme_title, readme_description = get_readme_data(name)
 
-        context = {}
-        if lang_name == "Python": context['user'], context['email'] = get_user_data()
-        elif lang_name == "Go (Golang)": context['module'] = get_module_go(name)
-        elif lang_name == "Java": context['user'], context['gui_choice'] = get_java_data()
-        elif lang_name == "Web (HTML/CSS/JS)": context['user'] = get_web_data()
-        elif lang_name == "Rust": context['user'], context['email'], context['license'] = get_rust_data()
+        if lang_name == "Python": 
+            context['user'], context['email'] = get_user_data() 
+        elif lang_name == "Go (Golang)": 
+            context['module'] = get_module_go(name)
+        elif lang_name == "Java": 
+            context['user'], context['gui_choice'] = get_java_data()
+        elif lang_name == "Web (HTML/CSS/JS)": 
+            context['user'] = get_web_data()
+        elif lang_name == "Rust": 
+            context['user'], context['email'] = get_rust_data()
+
+        # Global Licensing System
+        option_license = add_license()
+        selected_license = "None"
+        
+        lic_map = {"1": "MIT", "2": "Apache", "3": "GNU GPL", "4": "None"}
+        selected_license = lic_map.get(option_license, "None")
 
         try:
             print(f"\n{Colors.YELLOW}⚙ Building project...{Colors.END}")
             
-            # Setup execution
-            if lang_name == "Python": setup_python(name, readme_title, readme_description, context['user'], context['email'])
-            elif lang_name == "Go (Golang)": setup_go(name, readme_title, readme_description, context['module'])
-            elif lang_name == "Java": setup_java(name, readme_title, readme_description, context['user'], context['gui_choice'])
-            elif lang_name == 'Web (HTML/CSS/JS)': setup_web(name, readme_title, readme_description, context['user'])
-            elif lang_name == 'Rust': setup_rust(name, readme_title, readme_description, context['user'], context['email'], context['license'])
-            else: setup_func(name, readme_title, readme_description)
+            if lang_name == "Python": 
+                setup_python(name, readme_title, readme_description, context['user'], context['email'], selected_license, year)
+            elif lang_name == "Rust": 
+                setup_rust(name, readme_title, readme_description, context['user'], context['email'], selected_license, year)
+            elif lang_name == "Go (Golang)": 
+                setup_go(name, readme_title, readme_description, context['module'], context['user'], selected_license, year)
+            elif lang_name == "Java": 
+                setup_java(name, readme_title, readme_description, context['user'], context['gui_choice'], context['user'], selected_license, year)
+            elif lang_name == 'Web (HTML/CSS/JS)': 
+                setup_web(name, readme_title, readme_description, context['user'], selected_license, year)
+            elif lang_name == 'C':
+                setup_c(name, readme_title, readme_description, context['user'], selected_license, year)
+            elif lang_name == 'C++':
+                setup_cpp(name, readme_title, readme_description, context['user'], selected_license, year)
+            elif lang_name == 'TypeScript (Node)':
+                setup_typescript(name, readme_title, readme_description, context['user'], selected_license, year)
 
             spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
             for i in range(12):
@@ -104,7 +134,9 @@ def command_new():
 
             # Final summary
             print(f"\n{Colors.BLUE}✔ {Colors.END}{Colors.CYAN}Done! Project {Colors.BOLD}{name}{Colors.END} is ready.{Colors.END}")
+            print(f"  {Colors.DIM} Author: {Colors.END}{context['user']}")
             print(f"  {Colors.DIM} Language: {Colors.END}{lang_name}")
+            print(f"  {Colors.DIM} License: {Colors.END}{selected_license}")
             print(f"  {Colors.DIM} Git: {Colors.END}{'Initialized ✔' if git_status else 'Skipped ⚪'}")
             print(f"  {Colors.DIM} Path: {Colors.END}{os.path.abspath(name)}")
 
@@ -113,6 +145,7 @@ def command_new():
             print(f"  {Colors.CYAN} $ code .{Colors.END}\n")
             
             return name
+
         except Exception as e:
             print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}")
             return None
