@@ -3,7 +3,7 @@
 > A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.
 
 <p align="center">
-    <img src="https://img.shields.io/badge/version-v1.4.0-4c1"/>
+    <img src="https://img.shields.io/badge/version-v1.5.0-4c1"/>
     <img src="https://img.shields.io/badge/status-stable-2ea44f"/>
     <img src="https://img.shields.io/badge/maintenance-active-1f6feb"/>
     <img src="https://img.shields.io/badge/language-Python-3572A5"/>
@@ -11,7 +11,7 @@
 </p>
 
 > [!IMPORTANT]  
-> **mkproj** is now in stable version **v1.4.0**. This release introduces a complete UI overhaul, full project documentation, and integrated Git automation.
+> **mkproj** is now in stable version **v1.5.0**. This release introduces a complete UI overhaul, full project documentation, license addition, and integrated Git automation.
 
 ## Table of Contents
 
@@ -36,7 +36,7 @@
     <em>Automatic directory and file generation</em><br>
     <img src="./assets/screenshots/screenshot-002.png" alt="mkproj-cli interface demo 2" width="600">
     <br>
-    <em>Git automation, project summary and next steps</em><br>
+    <em>License addition, Git automation, project summary, and next step</em><br>
     <img src="./assets/screenshots/screenshot-003.png" alt="mkproj-cli interface demo 3" width="600">
 </p>
 
