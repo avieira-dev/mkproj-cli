@@ -1,14 +1,10 @@
-# mkproj-cli
+<div align="center">
+    <h1>mkproj</h1>
+    <p>A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.</p>
+    <img src="https://img.shields.io/badge/version-v1.5.0-4c1"/> <img src="https://img.shields.io/badge/status-stable-2ea44f"/> <img src="https://img.shields.io/badge/maintenance-active-1f6feb"/> <img src="https://img.shields.io/badge/language-Python-3572A5"/> <img src="https://img.shields.io/badge/license-MIT-6e7781"/>
+</div>
 
-> A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.
-
-<p align="center">
-    <img src="https://img.shields.io/badge/version-v1.5.0-4c1"/>
-    <img src="https://img.shields.io/badge/status-stable-2ea44f"/>
-    <img src="https://img.shields.io/badge/maintenance-active-1f6feb"/>
-    <img src="https://img.shields.io/badge/language-Python-3572A5"/>
-    <img src="https://img.shields.io/badge/license-MIT-6e7781"/>
-</p>
+---
 
 > [!IMPORTANT]  
 > **mkproj** is now in stable version **v1.5.0**. This release introduces a complete UI overhaul, full project documentation, license addition, and integrated Git automation.
@@ -25,24 +21,24 @@
 
 ## Overview
 
-**mkproj-cli** automates the tedious process of creating directory trees and boilerplate files. Whether you are starting a microservice in Python, a system tool in C/C++, or a corporate app in Java, **mkproj** ensures every project starts with a professional, clean, and consistent structure.
+**mkproj** automates the tedious process of creating directory trees and boilerplate files. Whether you are starting a microservice in Python, a system tool in C/C++, or a corporate app in Java, it ensures every project starts with a professional, clean, and consistent structure.
 
 ### Preview
 
 <p align="center">
     <em>Interactive language selection menu</em><br>
-    <img src="./assets/screenshots/screenshot-001.png" alt="mkproj-cli interface demo 1" width="600">
-    <br>
+    <img src="./assets/screenshots/screenshot-001.png" alt="mkproj interface demo 1" width="600">
+    <br><br>
     <em>Automatic directory and file generation</em><br>
-    <img src="./assets/screenshots/screenshot-002.png" alt="mkproj-cli interface demo 2" width="600">
-    <br>
+    <img src="./assets/screenshots/screenshot-002.png" alt="mkproj interface demo 2" width="600">
+    <br><br>
     <em>License addition, Git automation, project summary, and next step</em><br>
-    <img src="./assets/screenshots/screenshot-003.png" alt="mkproj-cli interface demo 3" width="600">
+    <img src="./assets/screenshots/screenshot-003.png" alt="mkproj interface demo 3" width="600">
 </p>
 
 ## Features
 
-- **Multi-language support**: Python, C, C++, Go, Java, Rust, Typescript and Web.
+- **Multi-language support**: Python, C, C++, Go, Java, Rust, TypeScript and Web.
 - **Integrated Git Automation**: Automatically initializes repositories and creates the first commit.
 - **Smart Scaffolding**: Generates professional directory trees, build files (CMake, Cargo, Go Mod, etc.), and documentation.
 - **Refined UI**: Interactive menus with icons, progress spinners, and clear next-step guidance.
@@ -54,7 +50,7 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/avieira-dev/mkproj-cli.git
+git clone [https://github.com/avieira-dev/mkproj-cli.git](https://github.com/avieira-dev/mkproj-cli.git)
 cd mkproj-cli
 ```
 
