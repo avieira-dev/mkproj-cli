@@ -22,6 +22,7 @@ def command_help():
     # Examples
     print(f"{Colors.BOLD}Examples:{Colors.END}")
     print(f" $ mkproj new my-awesome-app")
+    print(f" $ mkproj list")
     print(f" $ mkproj --help\n")
 
     print(f"{Colors.BLUE}Created by Alexandre Vieira (https://github.com/avieira-dev){Colors.END}\n")

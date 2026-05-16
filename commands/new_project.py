@@ -46,7 +46,7 @@ def command_new():
     
     name = sys.argv[2].strip()
     if not name or os.path.exists(name):
-        print(f"\n{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}")
+        print(f"\n{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}\n")
         return None
 
     full_name = welcome_user() 
@@ -149,8 +149,8 @@ def command_new():
             return name
 
         except Exception as e:
-            print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}")
+            print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}\n")
             return None
     else:
-        print(f"{Colors.RED}✖ Invalid choice!{Colors.END}")
+        print(f"{Colors.RED}✖ Invalid choice!{Colors.END}\n")
         return None

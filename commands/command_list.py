@@ -36,4 +36,4 @@ def command_list():
         print(f"{Colors.BLUE}│{Colors.END} {row.ljust(WIDTH - 4)} {Colors.BLUE}│{Colors.END}")
 
     print(f"{Colors.BLUE}└{'─' * (WIDTH - 2)}┘{Colors.END}")
-    print(f"\n{Colors.DIM}  ↳ {len(history)} project(s) total — stored in ~/.mkproj/project-history.json{Colors.END}\n")
+    print(f"{Colors.DIM}  ↳ {len(history)} project(s) total — stored in ~/.mkproj/project-history.json{Colors.END}\n")

@@ -58,7 +58,7 @@ def main():
             command_list()
         else:
             print(f"{Colors.RED}✖ Unknown command: {command}{Colors.END}")
-            print(f"{Colors.DIM}Hint: Type 'mkproj --help' to see available commands.{Colors.END}")
+            print(f"{Colors.DIM}Hint: Type 'mkproj --help' to see available commands.{Colors.END}\n")
     except KeyboardInterrupt:
         print(f"\n\n{Colors.YELLOW}⚠ Operation cancelled.{Colors.END}")
         if command == "new" and current_project and os.path.exists(current_project):
@@ -66,7 +66,7 @@ def main():
                 shutil.rmtree(current_project)
                 print(f"{Colors.DIM}  ↳ Partially created files removed.{Colors.END}")
             except: pass
-        print(f"{Colors.CYAN}Bye!{Colors.END}")
+        print(f"{Colors.CYAN}Bye!{Colors.END}\n")
         sys.exit(0)
 
 if __name__ == "__main__":
