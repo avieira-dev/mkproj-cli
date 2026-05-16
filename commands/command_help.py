@@ -16,6 +16,7 @@ def command_help():
     # Available commands
     print(f"{Colors.BOLD}Available Commands:{Colors.END}")
     print(f" {Colors.GREEN}new <name>{Colors.END} Starts the interactive project generator")
+    print(f" {Colors.GREEN}list{Colors.END} Shows history of created projects")
     print(f" {Colors.GREEN}help, -h, --help{Colors.END} Shows this help message\n")
 
     # Examples

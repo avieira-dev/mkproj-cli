@@ -15,6 +15,7 @@ import sys
 import os
 import shutil
 from pathlib import Path
+from commands.command_list import command_list
 
 # IMPORTANT: Fix for symbolic links
 script_dir = Path(__file__).resolve().parent
@@ -53,6 +54,8 @@ def main():
     try:
         if command == "new":
             current_project = command_new()
+        elif command == "list":
+            command_list()
         else:
             print(f"{Colors.RED}✖ Unknown command: {command}{Colors.END}")
             print(f"{Colors.DIM}Hint: Type 'mkproj --help' to see available commands.{Colors.END}")

@@ -14,6 +14,7 @@ import sys
 import time
 from datetime import datetime
 from utils.colors import Colors
+from utils.history import save_project
 from utils.prompter import (
     get_readme_data, get_user_data, 
     get_module_go, get_java_data,
@@ -127,7 +128,7 @@ def command_new():
                 sys.stdout.flush()
                 time.sleep(0.08)
             
-            sys.stdout.write(f"\r{Colors.GREEN}✔{Colors.END} Project structure generated!     \n")
+            sys.stdout.write(f"\r{Colors.GREEN}✔{Colors.END} Project structure generated!\n")
 
             # Git automation
             git_status = git_automation(name)
@@ -139,6 +140,7 @@ def command_new():
             print(f"  {Colors.DIM} License: {Colors.END}{selected_license}")
             print(f"  {Colors.DIM} Git: {Colors.END}{'Initialized ✔' if git_status else 'Skipped ⚪'}")
             print(f"  {Colors.DIM} Path: {Colors.END}{os.path.abspath(name)}")
+            save_project(name, lang_name, selected_license, context['user'], os.path.abspath(name))
 
             print(f"\n{Colors.BLUE}🚀 Next steps:{Colors.END}")
             print(f"  {Colors.CYAN} $ cd{Colors.END} {name}")
