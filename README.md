@@ -46,7 +46,9 @@
   <em>Automatic directory and file generation</em><br>
   <img src="./assets/screenshots/screenshot-002.png" alt="File generation" width="600"/><br><br>
   <em>License addition, Git automation, and next-step guidance</em><br>
-  <img src="./assets/screenshots/screenshot-003.png" alt="Git automation and summary" width="600"/>
+  <img src="./assets/screenshots/screenshot-003.png" alt="Git automation and summary" width="600"/><br><br>
+  <em>List created projects</em><br>
+  <img src="./assets/screenshots/screenshot-004.png" alt="List created projects" width="600"/>
 </p>
 
 ---
