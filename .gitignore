@@ -15,7 +15,6 @@ venv/
 ENV/
 env/
 .env
-# If using Poetry or Pipenv
 .venv
 pip-log.txt
 pip-delete-this-directory.txt
