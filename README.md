@@ -5,7 +5,7 @@
 <p>A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.</p>
 
 <p>
-  <img src="https://img.shields.io/badge/version-v1.6.0-4c1?style=flat-square"/>
+  <img src="https://img.shields.io/badge/version-v1.7.0-4c1?style=flat-square"/>
   <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
   <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
   <img src="https://img.shields.io/badge/language-Python-3572A5?style=flat-square&logo=python&logoColor=white"/>
@@ -17,7 +17,7 @@
 ---
 
 > [!IMPORTANT]
-> **mkproj v1.6.0** is now stable. This release introduces a complete UI overhaul, full project documentation, license management, and integrated Git automation.
+> **mkproj v1.7.0** is now stable. This release introduces a global configuration system, eliminating the need to re-enter author and email on every project creation.
 
 ---
 
@@ -41,14 +41,16 @@
 ### Preview
 
 <p align="center">
-  <em>Interactive language selection menu</em><br>
-  <img src="./assets/screenshots/screenshot-001.png" alt="Language selection" width="600"/><br><br>
-  <em>Automatic directory and file generation</em><br>
-  <img src="./assets/screenshots/screenshot-002.png" alt="File generation" width="600"/><br><br>
-  <em>License addition, Git automation, and next-step guidance</em><br>
-  <img src="./assets/screenshots/screenshot-003.png" alt="Git automation and summary" width="600"/><br><br>
+  <em>Help and available commands</em><br>
+  <img src="./assets/screenshots/screenshot-001.png" alt="Help" width="600"/><br><br>
+  <em>Global configuration setup</em><br>
+  <img src="./assets/screenshots/screenshot-002.png" alt="Global configuration" width="600"/><br><br>
+  <em>Interactive language selection and project configuration</em><br>
+  <img src="./assets/screenshots/screenshot-003.png" alt="Language selection" width="600"/><br><br>
+  <em>Git automation, summary, and next-step guidance</em><br>
+  <img src="./assets/screenshots/screenshot-004.png" alt="Project summary" width="600"/><br><br>
   <em>List created projects</em><br>
-  <img src="./assets/screenshots/screenshot-004.png" alt="List created projects" width="600"/>
+  <img src="./assets/screenshots/screenshot-005.png" alt="List created projects" width="600"/>
 </p>
 
 ---
@@ -56,6 +58,7 @@
 ## Features
 
 - **Smart Scaffolding** — Generates complete directory trees, build files (CMake, Cargo, Go Mod, Maven, etc.), and starter documentation
+- **Global Configuration** — Author and email set once via `mkproj config`, applied to every project automatically
 - **Integrated Git Automation** — Initializes the repository and creates the first commit automatically
 - **Multi-language Support** — Eight languages and environments out of the box
 - **Refined Interactive UI** — Menus with icons, progress spinners, and clear next-step guidance
@@ -115,11 +118,34 @@ Once linked, `mkproj` is available system-wide from any terminal session.
 
 ## Usage
 
+### First-time setup
+
+Before creating projects, configure your global author information:
+
+```bash
+mkproj config set author "Your Name"
+mkproj config set email "you@example.com"
+```
+
+To verify your configuration:
+
+```bash
+mkproj config show
+```
+
+### Creating a project
+
 ```bash
 mkproj new <project_name>
 ```
 
 Follow the interactive menu to select a language, configure Git, and choose a license. mkproj handles the rest.
+
+### Listing projects
+
+```bash
+mkproj list
+```
 
 ---
 
