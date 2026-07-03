@@ -2,7 +2,7 @@
 
 """
 FILE: main.py
-VERSION: 1.7.0
+VERSION: 1.7.1
 DESCRIPTION: Main entry point for the mkproj-cli tool.
 """
 
@@ -24,7 +24,7 @@ from commands.new_project import command_new
 from commands.command_help import command_help
 from commands.command_config import command_config
 
-VERSION = "1.7.0"
+VERSION = "1.7.1"
 
 def _is_config_set():
     config = read_config()

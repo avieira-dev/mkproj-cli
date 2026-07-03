@@ -5,7 +5,7 @@
 <p>A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.</p>
 
 <p>
-  <img src="https://img.shields.io/badge/version-v1.7.0-4c1?style=flat-square"/>
+  <img src="https://img.shields.io/badge/version-v1.7.1-4c1?style=flat-square"/>
   <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
   <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
   <img src="https://img.shields.io/badge/language-Python-3572A5?style=flat-square&logo=python&logoColor=white"/>
@@ -17,7 +17,7 @@
 ---
 
 > [!IMPORTANT]
-> **mkproj v1.7.0** is now stable. This release introduces a global configuration system, eliminating the need to re-enter author and email on every project creation.
+> **mkproj v1.7.1** is now stable. This release introduces a global configuration system, eliminating the need to re-enter author and email on every project creation.
 
 ---
 
