@@ -45,7 +45,7 @@ def command_new():
 
     name = sys.argv[2].strip()
     if not name or os.path.exists(name):
-        print(f"\n{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}\n")
+        print(f"{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}\n")
         return None
 
     # Load global config
