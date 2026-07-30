@@ -7,6 +7,7 @@
 <p>
   <img src="https://img.shields.io/badge/version-v1.7.1-4c1?style=flat-square"/>
   <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
+  <img src="https://img.shields.io/badge/platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black"/>
   <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
   <img src="https://img.shields.io/badge/language-Python-3572A5?style=flat-square&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/license-MIT-6e7781?style=flat-square"/>
