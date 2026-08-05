@@ -17,6 +17,10 @@
 
 ---
 
+## Overview
+
+**mkproj** eliminates the repetitive work of setting up new projects. Whether you are starting a microservice in Python, a system tool in C/C++, or an enterprise application in Java, mkproj generates a professional, consistent directory tree and all necessary boilerplate — in seconds.
+
 > [!IMPORTANT]
 > **mkproj v1.7.1** is now stable. This release introduces a global configuration system, eliminating the need to re-enter author and email on every project creation.
 
@@ -24,22 +28,18 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Showcase](#showcase)
 - [Features](#features)
 - [Supported Languages](#supported-languages)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Developer](#developer)
+- [Author](#author)
 - [License](#license)
 
 ---
 
-## Overview
-
-**mkproj** eliminates the repetitive work of setting up new projects. Whether you are starting a microservice in Python, a system tool in C/C++, or an enterprise application in Java, mkproj generates a professional, consistent directory tree and all necessary boilerplate — in seconds.
-
-### Preview
+## Showcase
 
 <p align="center">
   <em>Help and available commands</em><br>
@@ -70,16 +70,16 @@
 
 ## Supported Languages
 
-| Language / Environment | Build System | Notes |
-|---|---|---|
-| Python | `pyproject.toml` (PEP 621) | Virtual env ready |
-| C | CMake | Standard layout |
-| C++ | CMake | Standard layout |
-| Go | Go Modules | Standard project structure |
-| Java | Maven | Enterprise-style layout |
-| Rust | Cargo | `Cargo.toml` included |
-| TypeScript | `package.json` | ESM ready |
-| Web | — | HTML / CSS / JS boilerplate |
+| Language / Environment | Build System               | Notes                      |
+|------------------------|----------------------------|----------------------------|
+| Python                 | `pyproject.toml` (PEP 621) | Virtual env ready          |
+| C                      | CMake                      | Standard layout            |
+| C++                    | CMake                      | Standard layout            |
+| Go                     | Go Modules                 | Standard project structure |
+| Java                   | Maven                      | Enterprise-style layout    |
+| Rust                   | Cargo                      | `Cargo.toml` included      |
+| TypeScript             | `package.json`             | ESM ready                  |
+| Web                    | —                          | HTML / CSS / JS boilerplate|
 
 ---
 
@@ -166,9 +166,9 @@ mkproj-cli/
 
 ---
 
-## Developer
+## Author
 
-**Alexandre Vieira**
+**Alexandre Vieira**  
 GitHub: [@avieira-dev](https://github.com/avieira-dev)
 
 ---
