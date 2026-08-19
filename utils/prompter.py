@@ -44,7 +44,7 @@ def git_automation(name):
         path = os.path.abspath(name)
         if run_command(["git", "init"], path):
             run_command(["git", "add", "."], path)
-            run_command(["git", "commit", "-m", "chore: initial commit (mkproj)"], path)
+            run_command(["git", "commit", "-m", "first commit"], path)
             print(f"  {Colors.DIM}↳{Colors.END} {Colors.GREEN} Git ready!{Colors.END}")
             return True
         print(f"  {Colors.DIM}↳{Colors.END} {Colors.RED} Git failed.{Colors.END}")
