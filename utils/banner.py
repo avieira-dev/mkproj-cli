@@ -64,9 +64,12 @@ _STATIC_BANNER_LINES = _generate_static_banner()
 
 def print_banner(version):
     print()
+
     for line in _STATIC_BANNER_LINES:
         print(line)
+
     print()
+    
     print(
         f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v{version} "
         f"{Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n"

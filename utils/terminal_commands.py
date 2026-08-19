@@ -24,6 +24,7 @@ def run_command(command_list, cwd):
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
+        
         return True
     except (subprocess.CalledProcessError, Exception):
         return False

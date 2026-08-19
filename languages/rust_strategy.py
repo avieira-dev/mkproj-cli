@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_rust(name, readme_title, readme_description, username, email, license, year):
+def setup_rust(name, readme_title, readme_description, readme_overview, username, email, license, year):
     name_cargo = name.replace(" ", "_").replace("-", "_").lower()
 
     license_path = "licenses/mit.txt" if license == "MIT" else \
@@ -29,6 +29,7 @@ def setup_rust(name, readme_title, readme_description, username, email, license,
         "license": license,
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }

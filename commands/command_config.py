@@ -25,17 +25,24 @@ def command_config():
 
 def _show_config():
     config = read_config()
+
     print(f"\n{Colors.CYAN}{Colors.BOLD} Global Configuration{Colors.END}\n")
+
     for key, value in config.items():
         display = value if value else f"{Colors.DIM}(not set){Colors.END}"
         print(f"  {Colors.GREEN}{key}{Colors.END}: {display}")
+
     print()
 
 def _set_config(key, value):
     config = read_config()
+
     if key not in config:
         print(f"{Colors.RED}✖ Unknown key: {key}{Colors.END}\n")
         return
+    
     config[key] = value
+    
     write_config(config)
+
     print(f"{Colors.GREEN}✔{Colors.END} {key} set to \"{value}\"\n")

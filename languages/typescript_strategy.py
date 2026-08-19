@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_typescript(name, readme_title, readme_description, username, license, year):
+def setup_typescript(name, readme_title, readme_description, readme_overview, username, license, year):
     project_name = name.replace(" ", "-").replace("_", "-").lower()
 
     license_path = "licenses/mit.txt" if license == "MIT" else \
@@ -28,6 +28,7 @@ def setup_typescript(name, readme_title, readme_description, username, license, 
         "description": readme_description,
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }

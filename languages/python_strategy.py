@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_python(name, readme_title, readme_description, username, email, license, year):
+def setup_python(name, readme_title, readme_description, readme_overview, username, email, license, year):
     project_directory = name.replace(" ", "_").replace("-", "_").lower()
     project_name = name.replace(" ", "-").replace("_", "-").lower()
 
@@ -30,6 +30,7 @@ def setup_python(name, readme_title, readme_description, username, email, licens
         "email": email,
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }

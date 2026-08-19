@@ -28,6 +28,7 @@ VERSION = "1.7.1"
 
 def _is_config_set():
     config = read_config()
+    
     return bool(config.get("author")) and bool(config.get("email"))
 
 def main():

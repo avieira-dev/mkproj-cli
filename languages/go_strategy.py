@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_go(name, readme_title, readme_description, module, username, license, year):
+def setup_go(name, readme_title, readme_description, readme_overview, module, username, license, year):
     project_dir = name.replace(" ", "-").replace("_", "-").lower()
 
     license_path = "licenses/mit.txt" if license == "MIT" else \
@@ -27,6 +27,7 @@ def setup_go(name, readme_title, readme_description, module, username, license, 
         "module": module,
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }

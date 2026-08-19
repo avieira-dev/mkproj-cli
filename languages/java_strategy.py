@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_java(name, readme_title, readme_description, user_input, gui_choice, username, license, year):
+def setup_java(name, readme_title, readme_description, readme_overview, user_input, gui_choice, username, license, year):
     project_clean = name.replace(" ", "").replace("-", "").replace("_", "").lower()
 
     license_path = "licenses/mit.txt" if license == "MIT" else \
@@ -34,6 +34,7 @@ def setup_java(name, readme_title, readme_description, user_input, gui_choice, u
         "java_package": f"package {full_package_name};",
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }

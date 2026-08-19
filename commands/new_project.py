@@ -16,15 +16,8 @@ from datetime import datetime
 from utils.colors import Colors
 from utils.config import read_config
 from utils.history import save_project
-from utils.prompter import (
-    get_readme_data,
-    get_module_go, get_java_data,
-    git_automation, add_license)
-from languages import (
-    setup_python, setup_cpp, setup_c,
-    setup_web, setup_java, setup_go,
-    setup_rust, setup_typescript
-)
+from utils.prompter import (get_readme_data, get_module_go, get_java_data, git_automation, add_license)
+from languages import (setup_python, setup_cpp, setup_c, setup_web, setup_java, setup_go, setup_rust, setup_typescript)
 
 STRATEGIES = {
     "1": ("Python", setup_python, "🐍"),
@@ -84,7 +77,7 @@ def command_new():
 
     if choice in STRATEGIES:
         lang_name, setup_func, _ = STRATEGIES[choice]
-        readme_title, readme_description = get_readme_data(name)
+        readme_title, readme_description, readme_overview = get_readme_data(name)
 
         if lang_name == "Go (Golang)":
             context['module'] = get_module_go(name)
@@ -100,21 +93,21 @@ def command_new():
             print(f"\n{Colors.YELLOW}⚙ Building project...{Colors.END}")
 
             if lang_name == "Python":
-                setup_python(name, readme_title, readme_description, author, email, selected_license, year)
+                setup_python(name, readme_title, readme_description, readme_overview, author, email, selected_license, year)
             elif lang_name == "Rust":
-                setup_rust(name, readme_title, readme_description, author, email, selected_license, year)
+                setup_rust(name, readme_title, readme_description, readme_overview, author, email, selected_license, year)
             elif lang_name == "Go (Golang)":
-                setup_go(name, readme_title, readme_description, context['module'], author, selected_license, year)
+                setup_go(name, readme_title, readme_description, readme_overview, context['module'], author, selected_license, year)
             elif lang_name == "Java":
-                setup_java(name, readme_title, readme_description, context['user'], context['gui_choice'], author, selected_license, year)
+                setup_java(name, readme_title, readme_description, readme_overview, context['user'], context['gui_choice'], author, selected_license, year)
             elif lang_name == 'Web (HTML/CSS/JS)':
-                setup_web(name, readme_title, readme_description, author, selected_license, year)
+                setup_web(name, readme_title, readme_description, readme_overview, author, selected_license, year)
             elif lang_name == 'C':
-                setup_c(name, readme_title, readme_description, author, selected_license, year)
+                setup_c(name, readme_title, readme_description, readme_overview , author, selected_license, year)
             elif lang_name == 'C++':
-                setup_cpp(name, readme_title, readme_description, author, selected_license, year)
+                setup_cpp(name, readme_title, readme_description, readme_overview, author, selected_license, year)
             elif lang_name == 'TypeScript (Node)':
-                setup_typescript(name, readme_title, readme_description, author, selected_license, year)
+                setup_typescript(name, readme_title, readme_description, readme_overview, author, selected_license, year)
 
             spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
             for i in range(12):

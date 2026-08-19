@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_web(name, readme_title, readme_description, username, license, year):
+def setup_web(name, readme_title, readme_description, readme_overview, username, license, year):
     project_name_json = name.replace(" ", "-").replace("_", "-").lower()
     project_name_index = " ".join(word.capitalize() for word in name.replace("-", " ").replace("_", " ").split())
 
@@ -30,6 +30,7 @@ def setup_web(name, readme_title, readme_description, username, license, year):
         "project_name_index": project_name_index,
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }

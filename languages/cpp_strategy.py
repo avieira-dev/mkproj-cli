@@ -11,7 +11,7 @@ RESPONSIBILITIES:
 import os
 from utils.file_system import create_directory, create_from_template
 
-def setup_cpp(name, readme_title, readme_description, username, license, year):
+def setup_cpp(name, readme_title, readme_description, readme_overview, username, license, year):
     class_name = "".join(p.capitalize() for p in name.replace("_", "-").split("-"))
 
     license_path = "licenses/mit.txt" if license == "MIT" else \
@@ -27,6 +27,7 @@ def setup_cpp(name, readme_title, readme_description, username, license, year):
         "project_name": class_name,
         "readme_title": readme_title,
         "readme_description": readme_description,
+        "readme_overview": readme_overview,
         "year": year,
         "holder": username
     }
