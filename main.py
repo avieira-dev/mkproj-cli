@@ -24,7 +24,7 @@ from commands.new_project import command_new
 from commands.command_help import command_help
 from commands.command_config import command_config
 
-VERSION = "1.7.1"
+VERSION = "1.8.0"
 
 def _is_config_set():
     config = read_config()
