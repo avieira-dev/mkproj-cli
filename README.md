@@ -34,6 +34,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
+- [Roadmap](#roadmap)
 - [Author](#author)
 - [License](#license)
 
@@ -163,6 +164,19 @@ mkproj-cli/
 ├── LICENSE
 └── README.md
 ```
+
+---
+
+## Roadmap
+
+| Feature                                                         | Status                      |
+|-----------------------------------------------------------------|-----------------------------|
+| Support for 8 core languages/environments                       | ████████████████████ `100%` |
+| Global author and email configuration                           | ████████████████████ `100%` |
+| Integrated Git automation                                       | ████████████████████ `100%` |
+| Docker support (automated `Dockerfile` & `docker-compose.yaml`) | ████████░░░░░░░░░░░░ `40%`  |
+| Custom interactive structure definition at project creation     | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Custom user templates (`mkproj template save/load`)             | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
 
 ---
 
