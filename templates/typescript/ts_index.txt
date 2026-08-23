@@ -1,5 +1,6 @@
-function greet(): string {
-    return "Hello from TypeScript!";    
+function main(): void {
+    console.log("Hello from TypeScript!");
+    console.log("mkproj: A fast and flexible CLI tool.");
 }
 
-console.log(greet());
+main();

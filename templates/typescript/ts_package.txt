@@ -1,12 +1,15 @@
 {
-    "name": "$project_name",
-    "version": "1.0.0",
-    "description": "$description",
+    "name": "$project_name_ts",
+    "version": "0.1.0",
+    "description": "$ts_description",
     "main": "dist/index.js",
     "scripts": {
         "build": "tsc",
-        "dev": "ts-node src/index.ts",
-        "start": "node dist/index.js"
+        "start": "node dist/index.js",
+        "dev": "tsx watch src/index.ts"
     },
-    "license": "ISC"
+    "devDependencies": {
+        "tsx": "^4.7.0",
+        "typescript": "^5.3.0"
+    }
 }

@@ -12,14 +12,23 @@ html {
 }
 
 body {
-    background: #0f172a;
-    color: #e5e7eb;
+    width: 100vw;
+    height: 100vh;
+    background: #282828;
     display: flex;
-    justify-items: center;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 50px;
     font-weight: bold;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: normal;
+    color: #ffffff;
 }

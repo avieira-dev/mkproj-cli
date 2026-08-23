@@ -1,0 +1,18 @@
+# Stage 1: Build
+FROM rust AS builder
+
+WORKDIR /app
+
+COPY Cargo.toml .
+COPY src/ ./src/
+
+RUN cargo build --release
+
+# Stage 2: Production image
+FROM debian:stable-slim
+
+WORKDIR /app
+
+COPY --from=builder /app/target/release/${directory_name} /main
+
+CMD ["/main"]

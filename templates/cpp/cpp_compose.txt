@@ -1,0 +1,7 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: ${image_docker_name}:v1.0
+        container_name: $container_name

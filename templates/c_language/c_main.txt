@@ -2,5 +2,6 @@
 
 int main(void) {
     printf("Hello from the C Language!\n");
+    printf("mkproj: A fast and flexible CLI tool.\n");
     return 0;
 }

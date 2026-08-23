@@ -3,7 +3,7 @@ name = "$name_project"
 version = "0.1.0"
 edition = "2021"
 authors = ["$author_info"]
-description = "$description"
+description = "$cargo_description"
 license = "$license"
 
 [dependencies]

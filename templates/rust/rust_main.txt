@@ -1,3 +1,4 @@
 fn main() {
     println!("Hello from Rust!");
+    println!("mkproj: A fast and flexible CLI tool.");
 }

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$project_name_index</title>
+    <title>${project_index_title}</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./assets/js/script.js" defer></script>
 </head>
 <body>
-    <h1>Project: $project_name_index</h1>
+    <h1 id="title">Hello from the web project!</h1>
+    <p>mkproj: A fast and flexible CLI tool.</p>
 </body>
 </html>

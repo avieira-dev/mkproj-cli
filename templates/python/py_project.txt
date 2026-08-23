@@ -1,9 +1,9 @@
 [project]
-name = "$project_name"
+name = "$project_name_toml"
 version = "0.1.0"
-description = "$readme_description"
+description = "$description_toml"
 authors = [
-    {name = "$username", email = "$email"}
+    {name = "$name", email = "$email"}
 ]
 dependencies = []
 requires-python = ">=3.9"

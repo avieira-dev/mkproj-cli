@@ -1,6 +1,7 @@
-# $readme_title
-
-> $readme_description
+<div align="center">
+    <h1>$readme_title</h1>
+    <p>$readme_description</p>
+</div>
 
 ---
 
@@ -12,26 +13,12 @@ $readme_overview
 
 ## Table of Contents
 
-- [Usage](#usage)
+- [Author](#author)
 
 ---
 
-## Usage
-1. **Install the dependencies:**
+## Author
 
-    ```bash
-    npm install -D typescript ts-node @types/node
-    ```
+$readme_author
 
-2. Development (Rapid):
-
-    ```bash
-    npm run dev
-    ```
-
-3. Production (Final):
-
-    ```bash
-    npm run build
-    npm start
-    ```
+---

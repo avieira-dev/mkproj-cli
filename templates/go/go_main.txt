@@ -3,5 +3,6 @@ package main
 import "fmt"
 
 func main() {
-    fmt.Println("Hello from Golang!")
+	fmt.Println("Hello from Go!")
+	fmt.Println("mkproj: A fast and flexible CLI tool.")
 }

@@ -1,1 +1,8 @@
-alert('Hello from JavaScript!');
+const title = document.getElementById("title");
+const colors = ["#FF9D45", "#45FFE3", "#45A4FF"];
+let i = 0;
+
+setInterval(() => {
+    title.style.color = colors[i];
+    i = (i + 1) % colors.length;
+}, 1000);

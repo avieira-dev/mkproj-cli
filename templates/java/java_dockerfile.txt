@@ -1,0 +1,17 @@
+# Stage 1: Build
+FROM eclipse-temurin AS builder
+
+WORKDIR /app
+
+COPY src ./src
+
+RUN mkdir bin && javac -d bin $$(find src -name "*.java")
+
+# Stage 2: Production image
+FROM eclipse-temurin
+
+WORKDIR /app
+
+COPY --from=builder /app/bin ./bin
+
+CMD ["java", "-cp", "bin", "$full_package_name.Main"]

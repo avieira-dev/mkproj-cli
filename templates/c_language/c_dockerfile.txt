@@ -1,0 +1,19 @@
+# Stage 1: Compilation
+FROM alpine AS builder
+
+RUN apk add --no-cache build-base cmake
+
+WORKDIR /app
+
+COPY CMakeLists.txt .
+COPY include/ ./include
+COPY src/ ./src/
+
+RUN cmake -B build -S . && cmake --build build
+
+# Stage 2: Final image
+FROM alpine
+
+COPY --from=builder /app/build/${project_name_cmake} /main
+
+CMD ["/main"]

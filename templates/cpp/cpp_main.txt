@@ -2,5 +2,6 @@
 
 int main() {
     std::cout << "Hello from the C++!" << std::endl;
+    std::cout << "mkproj: A fast and flexible CLI tool." << std::endl;
     return 0;
 }

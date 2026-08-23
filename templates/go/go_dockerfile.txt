@@ -1,0 +1,16 @@
+# Stage 1: Compilation
+FROM golang AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+COPY cmd/ ./cmd/
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/build/${project_name_go} ./cmd/main.go
+
+# Stage 2: Final image (Minimal Alpine)
+FROM alpine
+
+COPY --from=builder /app/build/${project_name_go} /main
+
+CMD ["/main"]
