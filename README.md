@@ -40,13 +40,13 @@
 
 <p align="center">
     <em>Interactive language selection and project configuration</em><br>
-    <img src="./assets/screenshots/screenshot-001.png" alt="Language selection" width="500"/><br><br>
+    <img src="./assets/screenshots/screenshot-01.png" alt="Language selection" width="500"/><br><br>
     <em>List created projects</em><br>
-    <img src="./assets/screenshots/screenshot-002.png" alt="List created projects" width="500"/><br><br>
+    <img src="./assets/screenshots/screenshot-02.png" alt="List created projects" width="500"/><br><br>
     <em>Help and available commands</em><br>
-    <img src="./assets/screenshots/screenshot-003.png" alt="Help" width="500"/><br><br>
+    <img src="./assets/screenshots/screenshot-03.png" alt="Help" width="500"/><br><br>
     <em>Global configuration setup</em><br>
-    <img src="./assets/screenshots/screenshot-004.png" alt="Global configuration" width="500"/>
+    <img src="./assets/screenshots/screenshot-04.png" alt="Global configuration" width="500"/>
 </p>
 
 ---
