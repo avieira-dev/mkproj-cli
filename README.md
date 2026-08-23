@@ -1,18 +1,14 @@
 <div align="center">
-
-<h1>mkproj</h1>
-
-<p>A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.</p>
-
-<p>
-  <img src="https://img.shields.io/badge/version-v1.8.0-4c1?style=flat-square"/>
-  <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
-  <img src="https://img.shields.io/badge/platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black"/>
-  <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
-  <img src="https://img.shields.io/badge/language-Python-3572A5?style=flat-square&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/license-MIT-6e7781?style=flat-square"/>
-</p>
-
+    <h1>mkproj</h1>
+    <p>A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.</p>
+    <p>
+        <img src="https://img.shields.io/badge/version-v2.0.0-4c1?style=flat-square"/>
+        <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
+        <img src="https://img.shields.io/badge/platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black"/>
+        <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
+        <img src="https://img.shields.io/badge/language-Python-3572A5?style=flat-square&logo=python&logoColor=white"/>
+        <img src="https://img.shields.io/badge/license-MIT-6e7781?style=flat-square"/>
+    </p>
 </div>
 
 ---
@@ -21,8 +17,8 @@
 
 **mkproj** eliminates the repetitive work of setting up new projects. Whether you are starting a microservice in Python, a system tool in C/C++, or an enterprise application in Java, mkproj generates a professional, consistent directory tree and all necessary boilerplate — in seconds.
 
-> [!IMPORTANT]
-> **mkproj v1.8.0** is now stable. This release introduces a global configuration system, eliminating the need to re-enter author and email on every project creation.
+> [!IMPORTANT]  
+> **mkproj v2.0.0** is now stable. This major release introduces a global configuration system, color-coded interactive menus, Docker support, and streamlined project creation workflows.
 
 ---
 
@@ -43,16 +39,14 @@
 ## Showcase
 
 <p align="center">
-  <em>Help and available commands</em><br>
-  <img src="./assets/screenshots/screenshot-001.png" alt="Help" width="600"/><br><br>
-  <em>Global configuration setup</em><br>
-  <img src="./assets/screenshots/screenshot-002.png" alt="Global configuration" width="600"/><br><br>
-  <em>Interactive language selection and project configuration</em><br>
-  <img src="./assets/screenshots/screenshot-003.png" alt="Language selection" width="600"/><br><br>
-  <em>Git automation, summary, and next-step guidance</em><br>
-  <img src="./assets/screenshots/screenshot-004.png" alt="Project summary" width="600"/><br><br>
-  <em>List created projects</em><br>
-  <img src="./assets/screenshots/screenshot-005.png" alt="List created projects" width="600"/>
+    <em>Interactive language selection and project configuration</em><br>
+    <img src="./assets/screenshots/screenshot-001.png" alt="Language selection" width="500"/><br><br>
+    <em>List created projects</em><br>
+    <img src="./assets/screenshots/screenshot-002.png" alt="List created projects" width="500"/><br><br>
+    <em>Help and available commands</em><br>
+    <img src="./assets/screenshots/screenshot-003.png" alt="Help" width="500"/><br><br>
+    <em>Global configuration setup</em><br>
+    <img src="./assets/screenshots/screenshot-004.png" alt="Global configuration" width="500"/>
 </p>
 
 ---
@@ -60,10 +54,11 @@
 ## Features
 
 - **Smart Scaffolding** — Generates complete directory trees, build files (CMake, Cargo, Go Mod, Maven, etc.), and starter documentation
-- **Global Configuration** — Author and email set once via `mkproj config`, applied to every project automatically
+- **Global Configuration** — Author and email set once via `mkproj config set`, applied to every project automatically
 - **Integrated Git Automation** — Initializes the repository and creates the first commit automatically
+- **Docker Support** — Automatically generates tailored `Dockerfile` and `compose.yaml` files on demand
 - **Multi-language Support** — Eight languages and environments out of the box
-- **Refined Interactive UI** — Menus with icons, progress spinners, and clear next-step guidance
+- **Refined Interactive UI** — Menus with color coding, progress spinners, and clear next-step guidance
 - **Modern Standards** — Follows PEP 621 for Python, Maven layout for Java, standard Go project structure, and more
 - **Safety Guardrails** — Prevents accidental overwrites and validates project names before creation
 
@@ -99,7 +94,7 @@ cd mkproj-cli
 chmod +x main.py
 ```
 
-> [!TIP]
+> [!TIP]  
 > Ensure `main.py` has the shebang line at the top: `#!/usr/bin/env python3`
 
 ### 3. Create a global symlink (Linux / macOS)
@@ -110,8 +105,8 @@ sudo ln -s "$(pwd)/main.py" /usr/local/bin/mkproj
 
 Once linked, `mkproj` is available system-wide from any terminal session.
 
-> [!NOTE]
-> To uninstall, simply remove the symlink:
+> [!NOTE]  
+> To uninstall, simply remove the symlink:  
 > ```bash
 > sudo rm /usr/local/bin/mkproj
 > ```
@@ -132,16 +127,19 @@ mkproj config set email "you@example.com"
 To verify your configuration:
 
 ```bash
-mkproj config show
+mkproj config
 ```
+
+> [!NOTE]  
+> You can also use `mkproj config show`
 
 ### Creating a project
 
 ```bash
-mkproj new <project_name>
+mkproj new
 ```
 
-Follow the interactive menu to select a language, configure Git, and choose a license. mkproj handles the rest.
+Follow the interactive menu to select a language, enter your project name, customize the README, add a license, and configure Docker. mkproj handles the rest
 
 ### Listing projects
 
@@ -155,13 +153,23 @@ mkproj list
 
 ```text
 mkproj-cli/
+├── assets
 ├── commands/       
 ├── languages/      
-├── templates/               
-├── utils/          
+├── templates/
+|   ├── c_language/         
+|   ├── cpp/
+|   ├── go/
+|   ├── java/
+|   ├── licenses/
+|   ├── python/
+|   ├── rust/
+|   ├── typescript/
+|   └── web/  
+├── utils/ 
+├── .gitignore    
+├── LICENSE     
 ├── main.py         
-├── .gitignore
-├── LICENSE
 └── README.md
 ```
 
@@ -174,7 +182,7 @@ mkproj-cli/
 | Support for 8 core languages/environments                       | ████████████████████ `100%` |
 | Global author and email configuration                           | ████████████████████ `100%` |
 | Integrated Git automation                                       | ████████████████████ `100%` |
-| Docker support (automated `Dockerfile` & `compose.yaml`)        | ████████░░░░░░░░░░░░ `40%`  |
+| Docker support (automated `Dockerfile` & `compose.yaml`)        | ████████████████████ `100%` |
 | Custom interactive structure definition at project creation     | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
 | Custom user templates (`mkproj template save/load`)             | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
 
