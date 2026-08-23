@@ -1,12 +1,6 @@
 """
 FILE: commands/new_project.py
 DESCRIPTION: Orchestrator for the project creation workflow.
-RESPONSIBILITIES:
-  - Validate project names and directory availability
-  - Render the interactive CLI menu for language selection
-  - Coordinate data collection via prompter and route to specific language strategies
-  - Provide visual feedback (spinners/summaries) and final Git automation
-  - Handle the high-level project assembly sequence
 """
 
 import os
@@ -16,36 +10,33 @@ from datetime import datetime
 from utils.colors import Colors
 from utils.config import read_config
 from utils.history import save_project
-from utils.prompter import (get_readme_data, get_module_go, get_java_data, git_automation, add_license)
+from utils.robot import print_robot
+from utils.prompter import (select_menu, get_readme_data, get_module_go, get_java_data, git_automation, add_license, get_docker_choice)
 from languages import (setup_python, setup_cpp, setup_c, setup_web, setup_java, setup_go, setup_rust, setup_typescript)
 
-STRATEGIES = {
-    "1": ("Python", setup_python, "🐍"),
-    "2": ("C++", setup_cpp, "💻"),
-    "3": ("C", setup_c, "⚙️ "),
-    "4": ("Java", setup_java, "☕"),
-    "5": ("Go (Golang)", setup_go, "🐹"),
-    "6": ("Web (HTML/CSS/JS)", setup_web, "🌐"),
-    "7": ("Rust", setup_rust, "🦀"),
-    "8": ("TypeScript (Node)", setup_typescript, "🟦")
-}
+STRATEGIES = [
+    ("C", setup_c, Colors.CYAN),
+    ("C++", setup_cpp, Colors.BLUE),
+    ("Go (Golang)", setup_go, Colors.LIGHT_BLUE),
+    ("Java", setup_java, Colors.WHITE),
+    ("Python", setup_python, Colors.YELLOW),
+    ("Rust", setup_rust, Colors.ORANGE),
+    ("TypeScript (Node)", setup_typescript, Colors.BLUE),
+    ("Web (HTML/CSS/JS)", setup_web, Colors.PURPLE)
+]
 
 def command_new():
-    # Initial argument validation
-    if len(sys.argv) < 3:
-        print(f"{Colors.YELLOW}Usage: mkproj new <project_name>{Colors.END}")
+    if len(sys.argv) > 2:
+        print(f"{Colors.RED}✖ Error: Do not specify the project name in the command.{Colors.END}")
+        print(f"  {Colors.DIM}↳ Usage: mkproj new{Colors.END}\n")
         return None
 
-    name = sys.argv[2].strip()
-    if not name or os.path.exists(name):
-        print(f"{Colors.RED}✖ Error: Project name invalid or directory exists.{Colors.END}\n")
-        return None
+    print_robot()
 
-    # Load global config
     config = read_config()
     author = config["author"]
-    email  = config["email"]
-    year   = str(datetime.now().year)
+    email = config["email"]
+    year = str(datetime.now().year)
 
     context = {
         "user":   author,
@@ -54,90 +45,80 @@ def command_new():
         "year":   year
     }
 
-    print(f"\n{Colors.CYAN}🚀 Creating project:{Colors.END} {Colors.BOLD}{name}{Colors.END}\n")
+    print(f"{Colors.BOLD}Select Strategy:{Colors.END} {Colors.DIM}(Use ↑/↓ arrows and Enter){Colors.END}\n")
 
-    WIDTH = 45
-    print(f"{Colors.BLUE}┌{'─' * (WIDTH-2)}┐{Colors.END}")
-    header_text = " Select Strategy:"
-    print(f"{Colors.BLUE}│{Colors.END} {Colors.BOLD}{header_text.ljust(WIDTH-4)}{Colors.END} {Colors.BLUE}│{Colors.END}")
-    print(f"{Colors.BLUE}├{'─' * (WIDTH-2)}┤{Colors.END}")
+    menu_options = [(lang_name, lang_color) for lang_name, _, lang_color in STRATEGIES]
+    selected_idx = select_menu(menu_options)
+    
+    lang_name, setup_func, lang_color = STRATEGIES[selected_idx]
 
-    for key, (lang_name, _, icon) in STRATEGIES.items():
-        offset = 1 if len(icon) == 1 else 0
-        if lang_name == "C": offset = 1
+    print(f"\n{Colors.GREEN}✔{Colors.END} Selected: {lang_color}{Colors.BOLD}{lang_name}{Colors.END}")
 
-        prefix = f"  {Colors.CYAN}{key}){Colors.END} {icon} "
-        padding_size = WIDTH - len(lang_name) - 11 + offset
-        padding = " " * padding_size
-        print(f"{Colors.BLUE}│{Colors.END}{prefix}{lang_name}{padding}{Colors.BLUE}│{Colors.END}")
+    raw_name = input(f"\n{Colors.CYAN}?{Colors.END} {Colors.BOLD}Project name:{Colors.END} ").strip()
+    if not raw_name:
+        print(f"{Colors.RED}✖ Error: Project name cannot be empty.{Colors.END}\n")
+        return None
 
-    print(f"{Colors.BLUE}└{'─' * (WIDTH-2)}┘{Colors.END}")
+    if lang_name == "C":
+        safe_name = raw_name.replace(" ", "_").replace("-", "_").lower()
+    else:
+        safe_name = raw_name.replace(" ", "-").replace("_", "-").lower()
 
-    choice = input(f"\n{Colors.GREEN}❯{Colors.END} {Colors.BOLD}Selection:{Colors.END} ")
+    if safe_name != raw_name:
+        print(f"  {Colors.YELLOW}↳ Adjusted directory name to: {safe_name}{Colors.END}")
 
-    if choice in STRATEGIES:
-        lang_name, setup_func, _ = STRATEGIES[choice]
-        readme_title, readme_description, readme_overview = get_readme_data(name)
+    if os.path.exists(safe_name):
+        print(f"\n{Colors.RED}✖ Error: Directory '{safe_name}' already exists.{Colors.END}\n")
+        return None
+
+    readme_title, readme_description, readme_overview = get_readme_data(raw_name)
+
+    if lang_name == "Go (Golang)":
+        context['module'] = get_module_go(safe_name)
+    elif lang_name == "Java":
+        context['user'], context['gui_choice'] = get_java_data()
+
+    option_license = add_license()
+    lic_map = {"1": "MIT", "2": "Apache", "3": "GNU GPL", "4": "None"}
+    selected_license = lic_map.get(option_license, "None")
+
+    use_docker = get_docker_choice()
+
+    try:
+        print(f"\n{Colors.DIM}⚙ Building project...{Colors.END}")
+        project_dir = safe_name
 
         if lang_name == "Go (Golang)":
-            context['module'] = get_module_go(name)
+            project_dir = setup_func(safe_name, readme_title, readme_description, readme_overview, context['module'], author, selected_license, year, use_docker)
         elif lang_name == "Java":
-            context['user'], context['gui_choice'] = get_java_data()
+            project_dir = setup_func(safe_name, readme_title, readme_description, readme_overview, context['user'], context['gui_choice'], author, selected_license, year, use_docker)
+        else:
+            project_dir = setup_func(safe_name, readme_title, readme_description, readme_overview, author, selected_license, year, use_docker)
 
-        # Global Licensing System
-        option_license = add_license()
-        lic_map = {"1": "MIT", "2": "Apache", "3": "GNU GPL", "4": "None"}
-        selected_license = lic_map.get(option_license, "None")
+        spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+        for i in range(12):
+            sys.stdout.write(f"\r{Colors.CYAN}{spinner[i % len(spinner)]}{Colors.END} {Colors.DIM}Applying templates...{Colors.END}")
+            sys.stdout.flush()
+            time.sleep(0.08)
 
-        try:
-            print(f"\n{Colors.YELLOW}⚙ Building project...{Colors.END}")
+        sys.stdout.write(f"\r{Colors.GREEN}✔{Colors.END} {Colors.DIM}Project structure generated.{Colors.END}\n")
 
-            if lang_name == "Python":
-                setup_python(name, readme_title, readme_description, readme_overview, author, email, selected_license, year)
-            elif lang_name == "Rust":
-                setup_rust(name, readme_title, readme_description, readme_overview, author, email, selected_license, year)
-            elif lang_name == "Go (Golang)":
-                setup_go(name, readme_title, readme_description, readme_overview, context['module'], author, selected_license, year)
-            elif lang_name == "Java":
-                setup_java(name, readme_title, readme_description, readme_overview, context['user'], context['gui_choice'], author, selected_license, year)
-            elif lang_name == 'Web (HTML/CSS/JS)':
-                setup_web(name, readme_title, readme_description, readme_overview, author, selected_license, year)
-            elif lang_name == 'C':
-                setup_c(name, readme_title, readme_description, readme_overview , author, selected_license, year)
-            elif lang_name == 'C++':
-                setup_cpp(name, readme_title, readme_description, readme_overview, author, selected_license, year)
-            elif lang_name == 'TypeScript (Node)':
-                setup_typescript(name, readme_title, readme_description, readme_overview, author, selected_license, year)
+        git_status = git_automation(project_dir)
+        save_project(project_dir, lang_name, selected_license, author, os.path.abspath(project_dir))
 
-            spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
-            for i in range(12):
-                sys.stdout.write(f"\r{Colors.CYAN}{spinner[i % len(spinner)]}{Colors.END} {Colors.DIM}Applying templates...{Colors.END}")
-                sys.stdout.flush()
-                time.sleep(0.08)
+        print(f"\n{Colors.GREEN}✔{Colors.END} {Colors.BOLD}Done! Project '{project_dir}' is ready.{Colors.END}")
+        print(f"  {Colors.DIM}↳ Author:{Colors.END} {author}")
+        print(f"  {Colors.DIM}↳ Language:{Colors.END} {lang_color}{lang_name}{Colors.END}")
+        print(f"  {Colors.DIM}↳ License:{Colors.END} {selected_license}")
+        print(f"  {Colors.DIM}↳ Git:{Colors.END} {'Initialized' if git_status else 'Skipped'}")
+        print(f"  {Colors.DIM}↳ Path:{Colors.END} {os.path.abspath(project_dir)}")
 
-            sys.stdout.write(f"\r{Colors.GREEN}✔{Colors.END} Project structure generated!\n")
+        print(f"\n{Colors.BOLD}Next steps:{Colors.END}")
+        print(f"  cd {project_dir}")
+        print(f"  code .\n")
 
-            # Git automation
-            git_status = git_automation(name)
+        return project_dir
 
-            # Final summary
-            print(f"\n{Colors.BLUE}✔ {Colors.END}{Colors.CYAN}Done! Project {Colors.BOLD}{name}{Colors.END} is ready.{Colors.END}")
-            print(f"  {Colors.DIM} Author: {Colors.END}{author}")
-            print(f"  {Colors.DIM} Language: {Colors.END}{lang_name}")
-            print(f"  {Colors.DIM} License: {Colors.END}{selected_license}")
-            print(f"  {Colors.DIM} Git: {Colors.END}{'Initialized ✔' if git_status else 'Skipped ⚪'}")
-            print(f"  {Colors.DIM} Path: {Colors.END}{os.path.abspath(name)}")
-            save_project(name, lang_name, selected_license, author, os.path.abspath(name))
-
-            print(f"\n{Colors.BLUE}🚀 Next steps:{Colors.END}")
-            print(f"  {Colors.CYAN} $ cd{Colors.END} {name}")
-            print(f"  {Colors.CYAN} $ code .{Colors.END}\n")
-
-            return name
-
-        except Exception as e:
-            print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}\n")
-            return None
-    else:
-        print(f"{Colors.RED}✖ Invalid choice!{Colors.END}\n")
+    except Exception as e:
+        print(f"\n{Colors.RED}✖ Unexpected error: {e}{Colors.END}\n")
         return None
