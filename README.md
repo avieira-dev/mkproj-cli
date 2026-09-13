@@ -4,7 +4,7 @@
     <p>
         <img src="https://img.shields.io/badge/version-v2.0.0-4c1?style=flat-square"/>
         <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
-        <img src="https://img.shields.io/badge/platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black"/>
+        <img src="https://img.shields.io/badge/platform-Linux%20%2F%20macOS-FCC624?style=flat-square&logo=linux&logoColor=black"/>
         <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
         <img src="https://img.shields.io/badge/language-Python-3572A5?style=flat-square&logo=python&logoColor=white"/>
         <img src="https://img.shields.io/badge/license-MIT-6e7781?style=flat-square"/>
@@ -28,7 +28,13 @@
 - [Features](#features)
 - [Supported Languages](#supported-languages)
 - [Installation](#installation)
+    - [Clone the repository](#1-clone-the-repository)
+    - [Make the entry point executable](#2-make-the-entry-point-executable)
+    - [Create a global symlink (Linux / macOS)](#3-create-a-global-symlink-linux--macos)
 - [Usage](#usage)
+    - [First-time setup](#first-time-setup)
+    - [Creating a project](#creating-a-project)
+    - [Listing projects](#listing-projects)
 - [Project Structure](#project-structure)
 - [Roadmap](#roadmap)
 - [Author](#author)
@@ -40,13 +46,13 @@
 
 <p align="center">
     <em>Interactive language selection and project configuration</em><br>
-    <img src="./assets/screenshots/screenshot-01.png" alt="Language selection" width="500"/><br><br>
+    <img src="./assets/screenshots/screenshot-01.png" alt="Language selection" width="100%"/><br><br>
     <em>List created projects</em><br>
-    <img src="./assets/screenshots/screenshot-02.png" alt="List created projects" width="500"/><br><br>
+    <img src="./assets/screenshots/screenshot-02.png" alt="List created projects" width="100%"/><br><br>
     <em>Help and available commands</em><br>
-    <img src="./assets/screenshots/screenshot-03.png" alt="Help" width="500"/><br><br>
+    <img src="./assets/screenshots/screenshot-03.png" alt="Help" width="100%"/><br><br>
     <em>Global configuration setup</em><br>
-    <img src="./assets/screenshots/screenshot-04.png" alt="Global configuration" width="500"/>
+    <img src="./assets/screenshots/screenshot-04.png" alt="Global configuration" width="100%"/>
 </p>
 
 ---
@@ -106,10 +112,11 @@ sudo ln -s "$(pwd)/main.py" /usr/local/bin/mkproj
 Once linked, `mkproj` is available system-wide from any terminal session.
 
 > [!NOTE]  
-> To uninstall, simply remove the symlink:  
-> ```bash
-> sudo rm /usr/local/bin/mkproj
-> ```
+> To uninstall, simply remove the symlink:
+
+```bash
+sudo rm /usr/local/bin/mkproj
+```
 
 ---
 
