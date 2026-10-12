@@ -15,6 +15,10 @@ from string import Template
 def create_directory(path):
     os.makedirs(path, exist_ok=True)
 
+def create_file(file):
+    with open(file, 'w', encoding='utf-8'):
+        pass
+
 def create_from_template(template_rel_path, target_path, variables):
     base_dir = Path(__file__).resolve().parent.parent
     full_template_path = base_dir / "templates" / template_rel_path

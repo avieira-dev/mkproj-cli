@@ -16,5 +16,5 @@ def print_banner(version):
 """
     
     print(banner)
-    print(f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v{version} " 
-          f"{Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n")
+    print(f'{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD} v{version} ' 
+          f'{Colors.END} {Colors.DIM}Developer Productivity Tool{Colors.END}\n')
