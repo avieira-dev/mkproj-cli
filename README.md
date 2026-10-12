@@ -165,23 +165,108 @@ mkproj list
 
 ```text
 mkproj-cli/
-├── assets
+├── assets/
+│   └── screenshots/
+│       ├── prtsc-01.png
+│       ├── prtsc-02.png
+│       ├── prtsc-03.png
+│       ├── prtsc-04.png
+│       └── prtsc-05.png
 ├── commands/       
+│   ├── __init__.py
+│   ├── command_config.py
+│   ├── command_help.py
+│   ├── command_list.py
+│   └── new_project.py
 ├── languages/      
+│   ├── __init__.py
+│   ├── c_language_strategy.py
+│   ├── cpp_strategy.py
+│   ├── custom_strategy.py
+│   ├── go_strategy.py
+│   ├── java_strategy.py
+│   ├── python_strategy.py
+│   ├── rust_strategy.py
+│   ├── typescript_strategy.py
+│   └── web_strategy.py
 ├── templates/
-|   ├── c_language/         
-|   ├── cpp/
-|   ├── go/
-|   ├── java/
-|   ├── licenses/
-|   ├── python/
-|   ├── rust/
-|   ├── typescript/
-|   └── web/  
+│   ├── c_language/         
+│   │   ├── c_cmake.txt
+│   │   ├── c_compose.txt
+│   │   ├── c_dockerfile.txt
+│   │   ├── c_gitignore.txt
+│   │   ├── c_main.txt
+│   │   └── c_readme.txt
+│   ├── cpp/
+│   │   ├── cpp_cmake.txt
+│   │   ├── cpp_compose.txt
+│   │   ├── cpp_dockerfile.txt
+│   │   ├── cpp_gitignore.txt
+│   │   ├── cpp_main.txt
+│   │   └── cpp_readme.txt
+│   ├── go/
+│   │   ├── go_compose.txt
+│   │   ├── go_dockerfile.txt
+│   │   ├── go_gitignore.txt
+│   │   ├── go_main.txt
+│   │   ├── go_mod.txt
+│   │   └── go_readme.txt
+│   ├── java/
+│   │   ├── java_compose.txt
+│   │   ├── java_dockerfile.txt
+│   │   ├── java_gitignore.txt
+│   │   ├── java_main.txt
+│   │   └── java_readme.txt
+│   ├── licenses/
+│   │   ├── apache.txt
+│   │   ├── explanation.txt
+│   │   ├── gpl.txt
+│   │   └── mit.txt
+│   ├── python/
+│   │   ├── py_compose.txt
+│   │   ├── py_dockerfile.txt
+│   │   ├── py_gitignore.txt
+│   │   ├── py_main.txt
+│   │   ├── py_project.txt
+│   │   └── py_readme.txt
+│   ├── rust/
+│   │   ├── rust_cargo.txt
+│   │   ├── rust_compose.txt
+│   │   ├── rust_dockerfile.txt
+│   │   ├── rust_gitignore.txt
+│   │   ├── rust_main.txt
+│   │   └── rust_readme.txt
+│   ├── typescript/
+│   │   ├── ts_compose.txt
+│   │   ├── ts_config.txt
+│   │   ├── ts_dockerfile.txt
+│   │   ├── ts_gitignore.txt
+│   │   ├── ts_index.txt
+│   │   ├── ts_package.txt
+│   │   └── ts_readme.txt
+│   └── web/  
+│       ├── web_compose.txt
+│       ├── web_dockerfile.txt
+│       ├── web_gitignore.txt
+│       ├── web_index.txt
+│       ├── web_javascript.txt
+│       ├── web_json.txt
+│       ├── web_readme.txt
+│       └── web_style.txt
 ├── utils/ 
-├── .gitignore    
-├── LICENSE     
-├── main.py         
+│   ├── __init__.py
+│   ├── banner.py
+│   ├── colors.py
+│   ├── config.py
+│   ├── file_system.py
+│   ├── history.py
+│   ├── license.py
+│   ├── prompter.py
+│   ├── robot.py
+│   └── terminal_commands.py
+├── .gitignore
+├── LICENSE
+├── main.py
 └── README.md
 ```
 
