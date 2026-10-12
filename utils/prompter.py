@@ -47,22 +47,21 @@ def select_menu(options):
     selected_index = 0
     num_options = len(options)
 
-    sys.stdout.write("\033[?25l")
+    sys.stdout.write('\033[?25l')
     sys.stdout.flush()
 
     try:
         while True:
             for i, item in enumerate(options):
-                # Compatibility if it receives a tuple (name, color) or just a string
                 if isinstance(item, tuple):
                     name, color = item
                 else:
                     name, color = item, Colors.WHITE
 
                 if i == selected_index:
-                    sys.stdout.write(f"\r{Colors.CYAN}❯{Colors.END} {Colors.BOLD}{color}{name}{Colors.END}\033[K\n")
+                    sys.stdout.write(f'\r{Colors.CYAN}❯{Colors.END} {Colors.BOLD}{color}{name}{Colors.END}\033[K\n')
                 else:
-                    sys.stdout.write(f"\r  {color}{name}{Colors.END}\033[K\n")
+                    sys.stdout.write(f'\r  {color}{name}{Colors.END}\033[K\n')
 
             sys.stdout.flush()
 
@@ -74,70 +73,114 @@ def select_menu(options):
             elif key == 'ENTER':
                 break
 
-            sys.stdout.write(f"\033[{num_options}A")
+            sys.stdout.write(f'\033[{num_options}A')
 
     finally:
-        sys.stdout.write("\033[?25h")
+        sys.stdout.write('\033[?25h')
         sys.stdout.flush()
 
     return selected_index
 
 def get_readme_data(default_name):
-    print(f"{Colors.CYAN}?{Colors.END} {Colors.BOLD}Customize README?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Customize README?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
 
-    if input(Colors.END).lower().strip() == "y":
-        title = input(f"  {Colors.DIM}↳ Title [{default_name}]: {Colors.END}").strip() or default_name
-        description = input(f"  {Colors.DIM}↳ Description: {Colors.END}").strip() or "Project created with mkproj-cli."
-        overview = input(f"  {Colors.DIM}↳ Overview: {Colors.END}").strip() or "A project created using the mkproj-cli project creation automation tool."
+    if input(Colors.END).lower().strip() == 'y':
+        title = input(f'  {Colors.DIM}↳ Title [{default_name}]: {Colors.END}').strip() or default_name
+        description = input(f'  {Colors.DIM}↳ Description: {Colors.END}').strip() or 'Project created with mkproj-cli.'
+        overview = input(f'  {Colors.DIM}↳ Overview: {Colors.END}').strip() or 'A project created using the mkproj-cli project creation automation tool.'
         return title, description, overview
     
-    return default_name, "Project created with mkproj-cli.", "A project created using the mkproj-cli project creation automation tool."
+    return default_name, 'Project created with mkproj-cli.', 'A project created using the mkproj-cli project creation automation tool.'
 
 def get_module_go(default_name):
-    print(f"{Colors.CYAN}?{Colors.END} {Colors.BOLD}Use GitHub as Go module?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Use GitHub as Go module?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
 
-    if input(Colors.END).lower().strip() == "y":
-        return input(f"  {Colors.DIM}↳ Repo path: {Colors.END}").replace("https://", "").strip() or default_name
+    if input(Colors.END).lower().strip() == 'y':
+        return input(f'  {Colors.DIM}↳ Repo path: {Colors.END}').replace('https://', '').strip() or default_name
     
     return default_name
 
 def get_java_data():
-    user = "user"
-    print(f"{Colors.CYAN}?{Colors.END} {Colors.BOLD}Developer Domain?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    user = 'user'
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Developer Domain?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
 
-    if input(Colors.END).lower().strip() == "y":
-        user = input(f"  {Colors.DIM}↳ Domain (ex: com.app): {Colors.END}").strip().lower() or "user"
+    if input(Colors.END).lower().strip() == 'y':
+        user = input(f'  {Colors.DIM}↳ Domain (ex: com.app): {Colors.END}').strip().lower() or 'user'
 
-    print(f"{Colors.CYAN}?{Colors.END} {Colors.BOLD}Select Java template?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
-    choice = "1"
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Select Java template?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
+    choice = '1'
     
-    if input(Colors.END).lower().strip() == "y":
-        print(f"  {Colors.DIM}1) Console  2) GUI (Swing){Colors.END}")
-        choice = input(f"  {Colors.DIM}↳ Selection: {Colors.END}").strip() or "1"
+    if input(Colors.END).lower().strip() == 'y':
+        print(f'  {Colors.DIM}1) Console  2) GUI (Swing){Colors.END}')
+        choice = input(f'  {Colors.DIM}↳ Selection: {Colors.END}').strip() or '1'
 
     return user, choice
 
 def git_automation(path_name):
-    print(f"\n{Colors.CYAN}?{Colors.END} {Colors.BOLD}Initialize Git repository?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
+    print(f'\n{Colors.CYAN}?{Colors.END} {Colors.BOLD}Initialize Git repository?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
 
-    if input(Colors.END).lower().strip() == "y":
+    if input(Colors.END).lower().strip() == 'y':
         path = os.path.abspath(path_name)
-        if run_command(["git", "init", "-b", "main"], path):
-            run_command(["git", "add", "."], path)
-            run_command(["git", "commit", "-m", "first commit"], path)
+        if run_command(['git', 'init', '-b', 'main'], path):
+            run_command(['git', 'add', '.'], path)
+            run_command(['git', 'commit', '-m', 'first commit'], path)
             return True
     return False
 
 def add_license():
-    print(f"{Colors.CYAN}?{Colors.END} {Colors.BOLD}Add a license to the project?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
-    choice = "4"
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Add a license to the project?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
+    choice = '4'
 
-    if input(Colors.END).lower().strip() == "y":
-        print(f"  {Colors.DIM}1) MIT  2) Apache 2.0  3) GNU GPL v3.0  4) None{Colors.END}")
-        choice = input(f"  {Colors.DIM}↳ Selection [1-4]: {Colors.END}").strip() or "1"
+    if input(Colors.END).lower().strip() == 'y':
+        print(f'  {Colors.DIM}1) MIT  2) Apache 2.0  3) GNU GPL v3.0  4) None{Colors.END}')
+        choice = input(f'  {Colors.DIM}↳ Selection [1-4]: {Colors.END}').strip() or '1'
 
     return choice
 
 def get_docker_choice():
-    print(f"{Colors.CYAN}?{Colors.END} {Colors.BOLD}Add Docker support?{Colors.END} {Colors.DIM}(y/n){Colors.END}", end=" ")
-    return input(Colors.END).lower().strip() == "y"
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Add Docker support?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
+    return input(Colors.END).lower().strip() == 'y'
+
+def custom_structure():
+    print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Would you like to customize the default directory structure for this project?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
+
+    if input(Colors.END).lower().strip() == 'y':
+        while True:
+            dirs = input(f'  {Colors.DIM}↳ Directories (comma separated, e.g. src, src/assets, tests): {Colors.END}').strip()
+            files = input(f'  {Colors.DIM}↳ Files (comma separated, e.g. src/main.cpp, README.md): {Colors.END}').strip()
+
+            custom_dirs = [d.strip() for d in dirs.split(',') if d.strip()]
+            custom_files = [f.strip() for f in files.split(',') if f.strip()]
+
+            if custom_dirs or custom_files:
+                return True, custom_dirs, custom_files
+            
+            print(f'    {Colors.YELLOW}↳ ⚠ You must specify at least one directory or file. Try again.{Colors.END}')
+
+    return False, [], []
+
+def preview_and_confirm_structure(dirs, files):
+    while True:
+        print(f'\n{Colors.BOLD}Project Structure Preview:{Colors.END}')
+
+        print(f'{Colors.CYAN}Directories:{Colors.END}')
+        for i, dir in enumerate(dirs):
+            prefix = '└──' if i == len(dirs) - 1 else '├──'
+            print(f' {prefix} {dir}/')
+
+        print(f'{Colors.CYAN}Files:{Colors.END}')
+        for i, file in enumerate(files):
+            prefix = '└──' if i == len(files) - 1 else '├──'
+            print(f' {prefix} {file}')
+
+        print()
+
+        print(f'{Colors.CYAN}?{Colors.END} {Colors.BOLD}Do you want to create this project?{Colors.END} {Colors.DIM}(y/n){Colors.END}', end=' ')
+        choice = input(Colors.END).lower().strip()
+
+        if choice == 'y':
+            return True
+
+        print(f'{Colors.YELLOW}↳ Project creation cancelled. Restarting structure configuration...{Colors.END}\n')
+        
+        return False
