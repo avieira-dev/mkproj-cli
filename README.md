@@ -2,7 +2,7 @@
     <h1>mkproj</h1>
     <p>A fast and flexible CLI tool to scaffold structured projects in multiple programming languages.</p>
     <p>
-        <img src="https://img.shields.io/badge/version-v2.0.0-4c1?style=flat-square"/>
+        <img src="https://img.shields.io/badge/version-v3.0.0-4c1?style=flat-square"/>
         <img src="https://img.shields.io/badge/status-stable-2ea44f?style=flat-square"/>
         <img src="https://img.shields.io/badge/platform-Linux%20%2F%20macOS-FCC624?style=flat-square&logo=linux&logoColor=black"/>
         <img src="https://img.shields.io/badge/maintenance-active-1f6feb?style=flat-square"/>
@@ -18,7 +18,7 @@
 **mkproj** eliminates the repetitive work of setting up new projects. Whether you are starting a microservice in Python, a system tool in C/C++, or an enterprise application in Java, mkproj generates a professional, consistent directory tree and all necessary boilerplate — in seconds.
 
 > [!IMPORTANT]  
-> **mkproj v2.0.0** is now stable. This major release introduces a global configuration system, color-coded interactive menus, Docker support, and streamlined project creation workflows.
+> **mkproj v3.0.0** is now stable. This major release introduces custom structure scaffolding, interactive project previews, global configuration, color-coded menus, Docker support, and streamlined project creation workflows.
 
 ---
 
@@ -45,20 +45,24 @@
 ## Showcase
 
 <p align="center">
-    <em>Interactive language selection and project configuration</em><br>
-    <img src="./assets/screenshots/screenshot-01.png" alt="Language selection" width="100%"/><br><br>
-    <em>List created projects</em><br>
-    <img src="./assets/screenshots/screenshot-02.png" alt="List created projects" width="100%"/><br><br>
-    <em>Help and available commands</em><br>
-    <img src="./assets/screenshots/screenshot-03.png" alt="Help" width="100%"/><br><br>
-    <em>Global configuration setup</em><br>
-    <img src="./assets/screenshots/screenshot-04.png" alt="Global configuration" width="100%"/>
+    <em>Interactive strategy selection and project scaffolding with tree preview</em><br>
+    <img src="./assets/screenshots/prtsc-01.png" alt="Standard project creation with preview" width="100%"/><br><br>
+    <em>Custom directory and file structure setup on the fly</em><br>
+    <img src="./assets/screenshots/prtsc-02.png" alt="Custom structure creation" width="100%"/><br><br>
+    <em>Project history log (`mkproj list`)</em><br>
+    <img src="./assets/screenshots/prtsc-03.png" alt="List created projects" width="100%"/><br><br>
+    <em>Help menu and command overview (`v3.0.0`)</em><br>
+    <img src="./assets/screenshots/prtsc-04.png" alt="Help menu" width="100%"/><br><br>
+    <em>Global author and email configuration (`mkproj config`)</em><br>
+    <img src="./assets/screenshots/prtsc-05.png" alt="Global configuration" width="100%"/>
 </p>
 
 ---
 
 ## Features
 
+- **Custom Structures** — Define your own custom directories and files on the fly, breaking away from standard templates when needed
+- **Structure Preview & Confirmation** — Inspect the generated directory tree and file layout before writing anything to disk
 - **Smart Scaffolding** — Generates complete directory trees, build files (CMake, Cargo, Go Mod, Maven, etc.), and starter documentation
 - **Global Configuration** — Author and email set once via `mkproj config set`, applied to every project automatically
 - **Integrated Git Automation** — Initializes the repository and creates the first commit automatically
@@ -82,6 +86,7 @@
 | Rust                   | Cargo                      | `Cargo.toml` included      |
 | TypeScript             | `package.json`             | ESM ready                  |
 | Web                    | —                          | HTML / CSS / JS boilerplate|
+| Custom                 | User-defined               | Free structure layout      |
 
 ---
 
@@ -190,7 +195,7 @@ mkproj-cli/
 | Global author and email configuration                           | ████████████████████ `100%` |
 | Integrated Git automation                                       | ████████████████████ `100%` |
 | Docker support (automated `Dockerfile` & `compose.yaml`)        | ████████████████████ `100%` |
-| Custom interactive structure definition at project creation     | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Custom interactive structure definition & preview at creation   | ████████████████████ `100%` |
 | Custom user templates (`mkproj template save/load`)             | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
 
 ---
